@@ -2,7 +2,7 @@ import json
 import os
 from uuid import uuid4
 
-from schemas import NoteSchema
+from schemas import NoteSchema, NoteUpdateSchema
 
 class NoteRepository: 
     def __init__(self, filename='notes.json') -> None:
@@ -30,7 +30,26 @@ class NoteRepository:
         self._save_notes(notes=notes)
         return new_note
     
-    # ! update a existing note
+    
+    def update_note(self, note_id: str, updated_data: NoteUpdateSchema) -> dict: 
+        notes = self.get_all_notes()
+        note = self.get_note_by_id(note_id=note_id)
+        
+        if updated_data.title is not None: 
+            note['title'] =  updated_data.title
+        if updated_data.content is not None:
+            note['content'] = updated_data.content
+            
+        for i, existing_note in enumerate(notes):
+            if existing_note['id'] == note_id:
+                notes[i] = note
+                break
+            
+        self._save_notes(notes=notes)
+        return note
+        
+
+        
     
     # ! delete a existong note
     
