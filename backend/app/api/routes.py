@@ -46,5 +46,12 @@ def update_note(note_id: str, note_update: NoteUpdateSchema):
     if updated_note:
         return updated_note
     raise HTTPException(status_code=400, detail='Update failed')
-    
+
+
+@router.delete('/notes/{note_id}')
+def del_note(note_id: str):
+    deleted_note = notes_repo.delete_note(note_id=note_id)
+    if deleted_note:
+        return deleted_note
+    raise HTTPException(status_code=400, detail='Deletion failed')
      

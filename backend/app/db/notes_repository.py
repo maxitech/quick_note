@@ -48,10 +48,21 @@ class NoteRepository:
         self._save_notes(notes=notes)
         return note
         
+    
+    def delete_note(self, note_id) -> dict:
+        notes = self.get_all_notes()
+        note_to_del = self.get_note_by_id(note_id=note_id)
+
+        if note_to_del:
+            notes = [note for note in notes if note['id'] != note_id]
+            self._save_notes(notes=notes)
+            return note_to_del
 
         
-    
-    # ! delete a existong note
+                
+
+        
+        
     
     
     def _save_notes(self, notes):
