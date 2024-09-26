@@ -34,7 +34,10 @@ def get_note(note_id: str):
 
 @router.post('/notes')
 def create_note(note: NoteSchema):
-    return notes_repo.create_note(note=note)
+    new_note = notes_repo.create_note(note=note)
+    if new_note:
+        return new_note
+    raise HTTPException(status_code=500, detail='Failed to create note')
 
 
 @router.patch('/notes/{note_id}')
