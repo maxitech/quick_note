@@ -58,13 +58,7 @@ class NoteRepository:
             self._save_notes(notes=notes)
             return note_to_del
 
-        
-                
 
-        
-        
-    
-    
     def _save_notes(self, notes):
         for note in notes: 
             note['id'] = str(note['id'])
