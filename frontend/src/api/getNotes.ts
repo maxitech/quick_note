@@ -12,6 +12,5 @@ export default async function getNotes(): Promise<Note[]> {
   }
 
   const notes: Note[] = await response.json()
-  console.log(notes)
   return notes
 }

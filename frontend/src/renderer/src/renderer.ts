@@ -1,11 +1,12 @@
 import getNotes from '../../api/getNotes'
 import deleteNote from '../../api/deleteNote'
 import createNote from '../../api/createNote'
+import updateNote from '../../api/updateNote'
 import { Note } from '../../types/note'
 
 const notesContainer = document.getElementById('notes-container')
 
-const renderNotes = async () => {
+const renderNotes = async (): Promise<void> => {
   try {
     const notes: Note[] = await getNotes()
 
@@ -18,24 +19,41 @@ const renderNotes = async () => {
 
     notes.forEach((note: Note) => {
       const { id, title, content } = note
-      console.log('Rendering note with id:', id)
+
       const noteElement = document.createElement('div')
       noteElement.classList.add('note')
       noteElement.setAttribute('data-id', id.toString())
 
       const noteTitle = document.createElement('h2')
       noteTitle.textContent = title
-      noteElement.appendChild(noteTitle)
 
       const noteContent = document.createElement('p')
       noteContent.textContent = content
-      noteElement.appendChild(noteContent)
+
+      const noteTitleInput = document.createElement('input')
+      noteTitleInput.type = 'text'
+      noteTitleInput.value = title
+      noteTitleInput.style.display = 'none'
+
+      const noteContentInput = document.createElement('textarea')
+      noteContentInput.value = content
+      noteContentInput.style.display = 'none'
+
+      const editBtn = document.createElement('button')
+      editBtn.textContent = 'Edit'
+      editBtn.addEventListener('click', () => {
+        noteTitle.style.display = 'none'
+        noteContent.style.display = 'none'
+        noteTitleInput.style.display = 'block'
+        noteContentInput.style.display = 'block'
+        editBtn.style.display = 'none'
+        saveBtn.style.display = 'none'
+      })
 
       const delBtn = document.createElement('button')
       delBtn.textContent = 'Delete'
       delBtn.addEventListener('click', async () => {
         try {
-          console.log('Deleting note with id:', id)
           await deleteNote(id)
           renderNotes()
         } catch (error) {
@@ -43,7 +61,49 @@ const renderNotes = async () => {
         }
       })
 
+      const saveBtn = document.createElement('button')
+      saveBtn.textContent = 'Save'
+      saveBtn.style.display = 'none'
+
+      const handleInputChange = (): void => {
+        if (noteTitleInput.value.trim() !== title || noteContentInput.value.trim() !== content) {
+          saveBtn.style.display = 'block'
+        } else {
+          saveBtn.style.display = 'none'
+        }
+      }
+
+      noteTitleInput.addEventListener('input', handleInputChange)
+      noteContentInput.addEventListener('input', handleInputChange)
+
+      saveBtn.addEventListener('click', async () => {
+        try {
+          const updatedNote: Note = {
+            id: id,
+            title: noteTitleInput.value.trim(),
+            content: noteContentInput.value.trim()
+          }
+
+          if (!updatedNote.title || !updatedNote.content) {
+            console.error('Title and content cannot be empty!')
+            return
+          }
+
+          await updateNote(updatedNote)
+          renderNotes()
+        } catch (error) {
+          console.error('Save note failed!:', error)
+        }
+      })
+
+      noteElement.appendChild(noteTitle)
+      noteElement.appendChild(noteContent)
+      noteElement.appendChild(noteTitleInput)
+      noteElement.appendChild(noteContentInput)
+      noteElement.appendChild(editBtn)
       noteElement.appendChild(delBtn)
+      noteElement.appendChild(saveBtn)
+
       notesContainer!.appendChild(noteElement)
     })
   } catch (error) {
