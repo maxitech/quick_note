@@ -1,5 +1,6 @@
 import getNotes from '../../api/getNotes'
 import deleteNote from '../../api/deleteNote'
+import createNote from '../../api/createNote'
 import { Note } from '../../types/note'
 
 const notesContainer = document.getElementById('notes-container')
@@ -49,5 +50,31 @@ const renderNotes = async () => {
     console.error('Failed while loading the notes:', error)
   }
 }
+
+// Create new note
+const createNoteButton = document.getElementById('create-note-btn')
+const noteTitleInput = document.getElementById('note-title') as HTMLInputElement
+const noteContentInput = document.getElementById('note-content') as HTMLTextAreaElement
+
+createNoteButton!.addEventListener('click', async () => {
+  const newNote: Note = {
+    title: noteTitleInput.value.trim(),
+    content: noteContentInput.value.trim()
+  }
+
+  if (!newNote.title || !newNote.content) {
+    console.error('Note title and content cannot be empty!')
+    return
+  }
+
+  try {
+    await createNote(newNote)
+    noteTitleInput.value = ''
+    noteContentInput.value = ''
+    renderNotes()
+  } catch (error) {
+    console.error('Failed to create note:', error)
+  }
+})
 
 renderNotes()
