@@ -25,13 +25,14 @@ h1 {
 
 #notes-container {
   margin-top: 3rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 2rem;
-  justify-items: center;
 }
 
 .note-wrapper {
+  box-shadow: 19px 25px 47px -19px rgba(0, 0, 0, 0.56);
   position: relative;
 }
 
@@ -48,8 +49,6 @@ h1 {
   max-height: 300px;
   min-width: 300px;
   max-width: 300px;
-
-  box-shadow: 19px 25px 47px -19px rgba(0, 0, 0, 0.56);
 }
 
 .note::-webkit-scrollbar {
