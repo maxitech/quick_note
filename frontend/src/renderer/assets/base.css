@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Guides:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Guides:wght@400..700&family=Handlee&family=Permanent+Marker&display=swap');
 
 :root {
   --ev-c-white: #ffffff;
@@ -52,7 +52,7 @@ body {
   background: var(--color-background);
   line-height: 1.6;
   font-family:
-    'Edu AU VIC WA NT Guides',
+    'Handlee',
     cursive,
     Inter,
     -apple-system,

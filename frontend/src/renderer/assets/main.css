@@ -18,7 +18,8 @@ body::-webkit-scrollbar {
 
 h1 {
   color: var(--ev-c-black-soft);
-  font-size: 2rem;
+  font-size: 2.3rem;
+  font-weight: 600;
   display: flex;
   justify-content: center;
 }
@@ -57,10 +58,11 @@ h1 {
 
 .note > h2 {
   font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .note > p {
-  font-size: 1rem;
+  font-size: 1.125rem;
 }
 
 .del-btn {
