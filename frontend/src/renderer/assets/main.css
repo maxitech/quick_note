@@ -31,6 +31,10 @@ h1 {
   justify-items: center;
 }
 
+.note-wrapper {
+  position: relative;
+}
+
 .note {
   background-color: #feff9c;
   color: var(--ev-c-black-soft);
@@ -46,7 +50,6 @@ h1 {
   max-width: 300px;
 
   box-shadow: 19px 25px 47px -19px rgba(0, 0, 0, 0.56);
-  position: relative;
 }
 
 .note::-webkit-scrollbar {
@@ -73,6 +76,12 @@ h1 {
   justify-content: center;
   align-items: center;
   width: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.del-btn:hover {
+  width: 1.6rem;
 }
 
 @media (max-width: 720px) {

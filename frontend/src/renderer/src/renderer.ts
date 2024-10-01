@@ -20,6 +20,9 @@ const renderNotes = async (): Promise<void> => {
     notes.forEach((note: Note) => {
       const { id, title, content } = note
 
+      const noteWrapper = document.createElement('div')
+      noteWrapper.classList.add('note-wrapper')
+
       const noteElement = document.createElement('div')
       noteElement.classList.add('note')
       noteElement.setAttribute('data-id', id.toString())
@@ -78,11 +81,12 @@ const renderNotes = async (): Promise<void> => {
         }
       })
 
+      noteWrapper.appendChild(noteElement)
       noteElement.appendChild(noteTitle)
       noteElement.appendChild(noteContent)
-      noteElement.appendChild(delBtn)
+      noteWrapper.appendChild(delBtn)
 
-      notesContainer!.appendChild(noteElement)
+      notesContainer!.appendChild(noteWrapper)
     })
   } catch (error) {
     console.error('Failed while loading the notes:', error)
