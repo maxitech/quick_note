@@ -1,0 +1,72 @@
+@import './base.css';
+
+body {
+  overflow: hidden;
+  background-size: cover;
+  user-select: none;
+  padding: 2rem;
+  overflow: auto;
+
+  background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+    url('../../../resources/note_wall.jpg');
+  background-size: cover;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+h1 {
+  color: var(--ev-c-black-soft);
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+#notes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+.note {
+  background-color: #feff9c;
+  color: var(--ev-c-black-soft);
+
+  overflow-wrap: break-word;
+  white-space: normal;
+  overflow: auto;
+
+  padding: 1rem 2rem;
+  min-height: 300px;
+  max-height: 300px;
+  min-width: 300px;
+  max-width: 300px;
+
+  box-shadow: 19px 25px 47px -19px rgba(0, 0, 0, 0.56);
+}
+
+.note::-webkit-scrollbar {
+  display: none;
+}
+
+.note > h2 {
+  font-size: 1.5rem;
+}
+
+.note > p {
+  font-size: 1rem;
+}
+
+@media (max-width: 720px) {
+  p {
+    font-size: 20px;
+  }
+}
+
+/* @media (max-width: 620px) {
+}
+
+@media (max-width: 350px) {
+} */

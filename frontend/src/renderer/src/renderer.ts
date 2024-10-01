@@ -26,29 +26,11 @@ const renderNotes = async (): Promise<void> => {
 
       const noteTitle = document.createElement('h2')
       noteTitle.textContent = title
+      noteTitle.setAttribute('contenteditable', 'true')
 
       const noteContent = document.createElement('p')
       noteContent.textContent = content
-
-      const noteTitleInput = document.createElement('input')
-      noteTitleInput.type = 'text'
-      noteTitleInput.value = title
-      noteTitleInput.style.display = 'none'
-
-      const noteContentInput = document.createElement('textarea')
-      noteContentInput.value = content
-      noteContentInput.style.display = 'none'
-
-      const editBtn = document.createElement('button')
-      editBtn.textContent = 'Edit'
-      editBtn.addEventListener('click', () => {
-        noteTitle.style.display = 'none'
-        noteContent.style.display = 'none'
-        noteTitleInput.style.display = 'block'
-        noteContentInput.style.display = 'block'
-        editBtn.style.display = 'none'
-        saveBtn.style.display = 'none'
-      })
+      noteContent.setAttribute('contenteditable', 'true')
 
       const delBtn = document.createElement('button')
       delBtn.textContent = 'Delete'
@@ -61,27 +43,12 @@ const renderNotes = async (): Promise<void> => {
         }
       })
 
-      const saveBtn = document.createElement('button')
-      saveBtn.textContent = 'Save'
-      saveBtn.style.display = 'none'
-
-      const handleInputChange = (): void => {
-        if (noteTitleInput.value.trim() !== title || noteContentInput.value.trim() !== content) {
-          saveBtn.style.display = 'block'
-        } else {
-          saveBtn.style.display = 'none'
-        }
-      }
-
-      noteTitleInput.addEventListener('input', handleInputChange)
-      noteContentInput.addEventListener('input', handleInputChange)
-
-      saveBtn.addEventListener('click', async () => {
+      const saveNote = async (): Promise<void> => {
         try {
           const updatedNote: Note = {
             id: id,
-            title: noteTitleInput.value.trim(),
-            content: noteContentInput.value.trim()
+            title: noteTitle.innerText.trim(),
+            content: noteContent.innerText.trim()
           }
 
           if (!updatedNote.title || !updatedNote.content) {
@@ -90,19 +57,24 @@ const renderNotes = async (): Promise<void> => {
           }
 
           await updateNote(updatedNote)
-          renderNotes()
         } catch (error) {
           console.error('Save note failed!:', error)
+        }
+      }
+
+      noteTitle.addEventListener('blur', saveNote)
+      noteContent.addEventListener('blur', saveNote)
+
+      noteElement.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+          e.preventDefault()
+          saveNote()
         }
       })
 
       noteElement.appendChild(noteTitle)
       noteElement.appendChild(noteContent)
-      noteElement.appendChild(noteTitleInput)
-      noteElement.appendChild(noteContentInput)
-      noteElement.appendChild(editBtn)
       noteElement.appendChild(delBtn)
-      noteElement.appendChild(saveBtn)
 
       notesContainer!.appendChild(noteElement)
     })
