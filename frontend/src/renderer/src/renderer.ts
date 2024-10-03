@@ -101,21 +101,21 @@ const modalCreateNoteBtn = document.getElementById('modal-create-note-btn') as H
 const modalNoteTitleInput = document.getElementById('modal-note-title') as HTMLInputElement
 const modalNoteContentInput = document.getElementById('modal-note-content') as HTMLTextAreaElement
 
-openModalBtn.addEventListener('click', () => {
+openModalBtn.addEventListener('click', (): void => {
   modal.style.display = 'block'
 })
 
-closeModalBtn.addEventListener('click', () => {
+closeModalBtn.addEventListener('click', (): void => {
   modal.style.display = 'none'
 })
 
-window.addEventListener('click', (event: MouseEvent) => {
+window.addEventListener('click', (event: MouseEvent): void => {
   if (event.target === modal) {
     modal.style.display = 'none'
   }
 })
 
-modalCreateNoteBtn!.addEventListener('click', async (event) => {
+modalCreateNoteBtn!.addEventListener('click', async (event): Promise<void> => {
   event.preventDefault()
   const newNote: Note = {
     id: '',
