@@ -101,17 +101,36 @@ const modalCreateNoteBtn = document.getElementById('modal-create-note-btn') as H
 const modalNoteTitleInput = document.getElementById('modal-note-title') as HTMLInputElement
 const modalNoteContentInput = document.getElementById('modal-note-content') as HTMLTextAreaElement
 
-openModalBtn.addEventListener('click', (): void => {
+const openModal = (): void => {
   modal.style.display = 'block'
-})
+  modalNoteTitleInput.focus()
+}
 
-closeModalBtn.addEventListener('click', (): void => {
+const closeModal = (): void => {
   modal.style.display = 'none'
+}
+
+openModalBtn.addEventListener('click', openModal)
+
+closeModalBtn.addEventListener('click', closeModal)
+
+window.addEventListener('click', (event: MouseEvent) => {
+  if (event.target === modal) {
+    closeModal()
+  }
 })
 
-window.addEventListener('click', (event: MouseEvent): void => {
-  if (event.target === modal) {
-    modal.style.display = 'none'
+window.addEventListener('keydown', (event: KeyboardEvent) => {
+  if ((event.ctrlKey || event.metaKey) && event.key === 'n') {
+    event.preventDefault()
+    openModal()
+  }
+})
+
+window.addEventListener('keydown', (event: KeyboardEvent) => {
+  if (event.key === 'Escape') {
+    event.preventDefault()
+    closeModal()
   }
 })
 
