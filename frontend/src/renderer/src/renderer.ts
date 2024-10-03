@@ -118,6 +118,7 @@ window.addEventListener('click', (event: MouseEvent) => {
 modalCreateNoteBtn!.addEventListener('click', async (event) => {
   event.preventDefault()
   const newNote: Note = {
+    id: '',
     title: modalNoteTitleInput.value.trim(),
     content: modalNoteContentInput.value.trim()
   }
