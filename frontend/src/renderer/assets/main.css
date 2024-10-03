@@ -35,6 +35,12 @@ h1 {
 .note-wrapper {
   box-shadow: 19px 25px 47px -19px rgba(0, 0, 0, 0.56);
   position: relative;
+  border: 1px solid #b2b37a;
+}
+
+.note-wrapper:hover {
+  transform: translateY(-3px);
+  transition: all 0.3s;
 }
 
 .note {
