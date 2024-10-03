@@ -84,7 +84,6 @@ h1 {
   align-items: center;
   width: 1.5rem;
   cursor: pointer;
-  z-index: 10;
 }
 
 .del-btn:hover {
