@@ -110,9 +110,28 @@ const closeModal = (): void => {
   modal.style.display = 'none'
 }
 
-openModalBtn.addEventListener('click', openModal)
+const saveNote = async (): Promise<void> => {
+  const newNote: Note = {
+    id: '',
+    title: modalNoteTitleInput.value.trim(),
+    content: modalNoteContentInput.value.trim()
+  }
 
-closeModalBtn.addEventListener('click', closeModal)
+  if (!newNote.title || !newNote.content) {
+    console.error('Note title and content cannot be empty!')
+    return
+  }
+
+  try {
+    await createNote(newNote)
+    modalNoteTitleInput.value = ''
+    modalNoteContentInput.value = ''
+    closeModal()
+    renderNotes()
+  } catch (error) {
+    console.error('Failed to create note:', error)
+  }
+}
 
 window.addEventListener('click', (event: MouseEvent) => {
   if (event.target === modal) {
@@ -134,28 +153,17 @@ window.addEventListener('keydown', (event: KeyboardEvent) => {
   }
 })
 
-modalCreateNoteBtn!.addEventListener('click', async (event): Promise<void> => {
-  event.preventDefault()
-  const newNote: Note = {
-    id: '',
-    title: modalNoteTitleInput.value.trim(),
-    content: modalNoteContentInput.value.trim()
-  }
-
-  if (!newNote.title || !newNote.content) {
-    console.error('Note title and content cannot be empty!')
-    return
-  }
-
-  try {
-    await createNote(newNote)
-    modalNoteTitleInput.value = ''
-    modalNoteContentInput.value = ''
-    modal.style.display = 'none'
-    renderNotes()
-  } catch (error) {
-    console.error('Failed to create note:', error)
+window.addEventListener('keydown', (event: KeyboardEvent) => {
+  if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+    event.preventDefault()
+    saveNote()
   }
 })
+
+openModalBtn.addEventListener('click', openModal)
+
+closeModalBtn.addEventListener('click', closeModal)
+
+modalCreateNoteBtn.addEventListener('click', saveNote)
 
 renderNotes()
