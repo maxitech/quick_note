@@ -9,13 +9,27 @@
   </head>
   <body>
     <h1>Notizen</h1>
+    <button id="open-modal-btn" class="open-modal-btn">Add Note</button>
+
     <div id="notes-container"></div>
 
-    <div>
-      <h2>Create Note</h2>
-      <input type="text" id="note-title" placeholder="Title" />
-      <textarea id="note-content" placeholder="Content"></textarea>
-      <button id="create-note-btn">Add Note</button>
+    <div id="note-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-content-container">
+          <h2>New Note</h2>
+          <button class="close-modal">Cancel</button>
+        </div>
+
+        <form class="create-note-form">
+          <label for="note-title" class="note-lable">Title</label>
+          <input type="text" id="note-title" placeholder="Title" />
+
+          <label for="note-content" class="note-lable">Notes</label>
+          <textarea id="note-content" placeholder="Content"></textarea>
+
+          <button id="create-note-btn" class="add-note-btn">Save</button>
+        </form>
+      </div>
     </div>
 
     <script src="./src/renderer.ts" type="module"></script>

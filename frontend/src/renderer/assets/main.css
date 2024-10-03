@@ -90,6 +90,113 @@ h1 {
   width: 1.6rem;
 }
 
+/* Create note section */
+
+.open-modal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  padding: 0.625rem;
+  border: none;
+  border-radius: 8px;
+
+  background-color: #feff9c;
+
+  font-size: 0.875rem;
+  font-weight: bold;
+
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.open-modal-btn:hover,
+.open-modal-btn:active {
+  background-color: #e8e9a2;
+}
+
+.modal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-content {
+  background-color: #feff9c;
+  margin: 15% auto;
+  padding: 20px;
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+
+  color: var(--ev-c-black-soft);
+}
+
+.close-modal {
+  background-color: transparent;
+  color: #007aff;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  display: block;
+  transition: all 0.3s;
+}
+
+.close-modal:hover,
+.close-modal:active {
+  color: #005ec2;
+}
+
+.modal-content-container {
+  display: flex;
+  align-items: center;
+}
+
+.modal-content-container h2 {
+  font-weight: bold;
+}
+
+.create-note-form input,
+.create-note-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Handlee', cursive;
+}
+
+.note-lable {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+.add-note-btn {
+  padding: 10px 10px;
+  background-color: #007aff;
+  border: none;
+  border-radius: 8px;
+  display: block;
+  width: 100%;
+  margin-top: 1.875rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.add-note-btn:hover,
+.add-note-btn:active {
+  background-color: #005ec2;
+}
+
 @media (max-width: 720px) {
   p {
     font-size: 20px;
