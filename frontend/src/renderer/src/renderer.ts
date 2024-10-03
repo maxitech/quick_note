@@ -94,14 +94,32 @@ const renderNotes = async (): Promise<void> => {
 }
 
 // Create new note
-const createNoteButton = document.getElementById('create-note-btn')
-const noteTitleInput = document.getElementById('note-title') as HTMLInputElement
-const noteContentInput = document.getElementById('note-content') as HTMLTextAreaElement
+const modal = document.getElementById('note-modal') as HTMLDivElement
+const openModalBtn = document.getElementById('open-modal-btn') as HTMLButtonElement
+const closeModalBtn = document.getElementById('close-modal') as HTMLSpanElement
+const modalCreateNoteBtn = document.getElementById('modal-create-note-btn') as HTMLButtonElement
+const modalNoteTitleInput = document.getElementById('modal-note-title') as HTMLInputElement
+const modalNoteContentInput = document.getElementById('modal-note-content') as HTMLTextAreaElement
 
-createNoteButton!.addEventListener('click', async () => {
+openModalBtn.addEventListener('click', () => {
+  modal.style.display = 'block'
+})
+
+closeModalBtn.addEventListener('click', () => {
+  modal.style.display = 'none'
+})
+
+window.addEventListener('click', (event: MouseEvent) => {
+  if (event.target === modal) {
+    modal.style.display = 'none'
+  }
+})
+
+modalCreateNoteBtn!.addEventListener('click', async (event) => {
+  event.preventDefault()
   const newNote: Note = {
-    title: noteTitleInput.value.trim(),
-    content: noteContentInput.value.trim()
+    title: modalNoteTitleInput.value.trim(),
+    content: modalNoteContentInput.value.trim()
   }
 
   if (!newNote.title || !newNote.content) {
@@ -111,8 +129,9 @@ createNoteButton!.addEventListener('click', async () => {
 
   try {
     await createNote(newNote)
-    noteTitleInput.value = ''
-    noteContentInput.value = ''
+    modalNoteTitleInput.value = ''
+    modalNoteContentInput.value = ''
+    modal.style.display = 'none'
     renderNotes()
   } catch (error) {
     console.error('Failed to create note:', error)
