@@ -86,7 +86,7 @@ const renderNotes = async (): Promise<void> => {
       noteElement.appendChild(noteContent)
       noteWrapper.appendChild(delBtn)
 
-      notesContainer!.appendChild(noteWrapper)
+      notesContainer!.insertBefore(noteWrapper, notesContainer!.firstChild)
     })
   } catch (error) {
     console.error('Failed while loading the notes:', error)
