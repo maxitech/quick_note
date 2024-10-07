@@ -35,7 +35,6 @@ h1 {
 .note-wrapper {
   box-shadow: 19px 25px 47px -19px rgba(0, 0, 0, 0.56);
   position: relative;
-  border: 1px solid #b2b37a;
 }
 
 .note-wrapper:nth-child(odd) {
@@ -52,7 +51,6 @@ h1 {
 }
 
 .note {
-  /* background-color: #feff9c; */
   color: var(--ev-c-black-soft);
 
   overflow-wrap: break-word;
