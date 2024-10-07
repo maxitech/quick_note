@@ -38,13 +38,21 @@ h1 {
   border: 1px solid #b2b37a;
 }
 
+.note-wrapper:nth-child(odd) {
+  background-color: #ff7eb9;
+}
+
+.note-wrapper:nth-child(even) .note {
+  background-color: #7afcff;
+}
+
 .note-wrapper:hover {
   transform: translateY(-3px);
   transition: all 0.3s;
 }
 
 .note {
-  background-color: #feff9c;
+  /* background-color: #feff9c; */
   color: var(--ev-c-black-soft);
 
   overflow-wrap: break-word;
