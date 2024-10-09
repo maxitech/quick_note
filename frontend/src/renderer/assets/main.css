@@ -84,15 +84,11 @@ h1 {
   white-space: normal;
   overflow: auto;
 
-  padding: 1rem 2rem;
+  padding: 2rem 2rem;
   min-height: 300px;
   max-height: 300px;
   min-width: 300px;
   max-width: 300px;
-}
-
-.sticky-note-style_note {
-  padding-top: 2rem;
 }
 
 .note::-webkit-scrollbar {

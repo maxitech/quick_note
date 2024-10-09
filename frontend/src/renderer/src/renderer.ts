@@ -52,7 +52,6 @@ const renderNotes = async (): Promise<void> => {
         document.body.classList.add('sticky-note-style_body')
         notesContainer?.classList.add('sticky-note-style_note-container')
         noteWrapper.classList.add('sticky-note-style_note-wrapper')
-        noteElement.classList.add('sticky-note-style_note')
       }
 
       delBtn.addEventListener('click', async () => {
