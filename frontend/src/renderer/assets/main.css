@@ -61,7 +61,6 @@ h1 {
   background-color: rgba(0, 0, 0, 0.076);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.233);
   -webkit-app-region: drag;
-  cursor: all-scroll;
 }
 
 .sticky-note-style_note-wrapper {
