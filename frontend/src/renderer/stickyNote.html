@@ -8,24 +8,23 @@
     <title>My Electron App</title>
   </head>
   <body>
-    <!-- <div class="glue-strip"></div> -->
     <div id="notes-container" class="notes-container"></div>
 
-    <div id="note-modal" class="modal">
-      <div class="modal-content">
+    <div id="note-modal" class="modal_sticky">
+      <div class="modal-content_sticky">
         <div class="modal-content-container">
           <h2>New Note</h2>
           <button id="close-modal" class="close-modal">Cancel</button>
         </div>
 
         <form class="create-note-form">
-          <label for="note-title" class="note-lable">Title</label>
+          <label for="note-title" class="note-lable_sticky">Title</label>
           <input type="text" id="modal-note-title" placeholder="Title" />
 
-          <label for="note-content" class="note-lable">Notes</label>
+          <label for="note-content" class="note-lable_sticky">Notes</label>
           <textarea id="modal-note-content" placeholder="Content"></textarea>
 
-          <button id="modal-create-note-btn" class="add-note-btn">Save</button>
+          <button id="modal-create-note-btn" class="add-note-btn_sticky">Save</button>
         </form>
       </div>
     </div>
