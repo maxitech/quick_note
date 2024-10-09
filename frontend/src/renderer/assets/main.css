@@ -1,13 +1,19 @@
 @import './base.css';
 
 body {
-  overflow: hidden;
+  overflow: auto;
   background-size: cover;
   user-select: none;
   padding: 2rem;
-  overflow: auto;
 
   background-color: #343a40;
+}
+
+.sticky-note-style_body {
+  width: 300px;
+  height: 300px;
+  padding: 0;
+  overflow: hidden;
 }
 
 body::-webkit-scrollbar {
@@ -22,7 +28,7 @@ h1 {
   justify-content: center;
 }
 
-#notes-container {
+.notes-container {
   margin-top: 3rem;
   display: flex;
   justify-content: center;
@@ -30,9 +36,37 @@ h1 {
   gap: 2rem;
 }
 
+.sticky-note-style_note-container {
+  margin: 0;
+  height: 300px;
+  overflow-y: auto;
+
+  scroll-snap-type: y mandatory;
+}
+
+#notes-container::-webkit-scrollbar {
+  display: none;
+}
+
 .note-wrapper {
   box-shadow: 19px 25px 47px -19px rgba(0, 0, 0, 0.56);
   position: relative;
+}
+
+.glue-strip {
+  position: absolute;
+  z-index: 999;
+  width: 300px;
+  height: 28px;
+  background-color: rgba(0, 0, 0, 0.076);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.233);
+  -webkit-app-region: drag;
+  cursor: all-scroll;
+}
+
+.sticky-note-style_note-wrapper {
+  box-shadow: none;
+  scroll-snap-align: start;
 }
 
 .note-wrapper:nth-child(odd) {
@@ -55,6 +89,10 @@ h1 {
   max-height: 300px;
   min-width: 300px;
   max-width: 300px;
+}
+
+.sticky-note-style_note {
+  padding-top: 2rem;
 }
 
 .note::-webkit-scrollbar {
