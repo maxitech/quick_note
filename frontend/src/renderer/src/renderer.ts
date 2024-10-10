@@ -63,6 +63,9 @@ const renderNotes = async (): Promise<void> => {
         }
       })
 
+      let previousTitle = title
+      let previousContent = content
+
       const saveNote = async (): Promise<void> => {
         try {
           const updatedNote: Note = {
@@ -76,7 +79,14 @@ const renderNotes = async (): Promise<void> => {
             return
           }
 
-          await updateNote(updatedNote)
+          if (updatedNote.title !== previousTitle || updatedNote.content !== previousContent) {
+            await updateNote(updatedNote)
+            // Wenn erfolgreich, aktualisiere die vorherigen Werte
+            previousTitle = updatedNote.title
+            previousContent = updatedNote.content
+          } else {
+            console.log('No changes detected. No API call made.')
+          }
         } catch (error) {
           console.error('Save note failed!:', error)
         }
