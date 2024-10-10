@@ -20,6 +20,13 @@ function createWindow(): void {
     }
   })
 
+  if (mainWindow) {
+    mainWindow.on('closed', () => {
+      mainWindow = null
+      ipcMain.removeHandler('get-window-type')
+    })
+  }
+
   mainWindow.loadFile('index.html')
 
   mainWindow.on('ready-to-show', () => {
@@ -72,9 +79,13 @@ function registerShortcuts(): void {
 ipcMain.on('get-window-type', (event) => {
   const sender = event.sender
 
-  if (mainWindow && sender === mainWindow.webContents) {
+  if (mainWindow && !mainWindow.isDestroyed() && sender === mainWindow.webContents) {
     event.returnValue = 'mainWindow'
-  } else if (stickyNoteWindow && sender === stickyNoteWindow.webContents) {
+  } else if (
+    stickyNoteWindow &&
+    !stickyNoteWindow.isDestroyed() &&
+    sender === stickyNoteWindow.webContents
+  ) {
     event.returnValue = 'stickyNote'
   } else {
     event.returnValue = 'unknown'
