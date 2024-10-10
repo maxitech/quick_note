@@ -8,6 +8,14 @@ let stickyNoteWindow: BrowserWindow | null = null
 
 function createWindow(): void {
   // Create the browser window.
+  if (mainWindow && !mainWindow.isDestroyed()) {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore()
+    }
+    mainWindow.focus()
+    return
+  }
+
   mainWindow = new BrowserWindow({
     width: 1068,
     height: 670,
@@ -45,9 +53,18 @@ function createWindow(): void {
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+
+  mainWindow.on('closed', () => {
+    mainWindow = null
+  })
 }
 
 function createStickyNote(): void {
+  if (stickyNoteWindow && !stickyNoteWindow.isDestroyed()) {
+    stickyNoteWindow.focus()
+    return
+  }
+
   stickyNoteWindow = new BrowserWindow({
     width: 300,
     height: 300,
@@ -68,11 +85,19 @@ function createStickyNote(): void {
   } else {
     stickyNoteWindow.loadFile(join(__dirname, '../renderer/stickyNote.html'))
   }
+
+  stickyNoteWindow.on('closed', () => {
+    stickyNoteWindow = null
+  })
 }
 
 function registerShortcuts(): void {
-  globalShortcut.register('CommandOrControl+Shift+N', () => {
+  globalShortcut.register('CommandOrControl+Alt+N', () => {
     createStickyNote()
+  })
+
+  globalShortcut.register('CommandOrControl+Shift+Alt+N', () => {
+    createWindow()
   })
 }
 
