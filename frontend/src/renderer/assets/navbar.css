@@ -1,0 +1,61 @@
+nav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 11rem;
+  max-width: 11rem;
+  height: 100vh;
+
+  background-color: #a6a6a6;
+}
+
+nav > button,
+.nav-btn {
+  text-align: left;
+  padding-left: 1.375rem;
+  height: 1.5rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+nav > button:hover {
+  background-color: #6b6b6b;
+}
+
+/* .open-modal-btn {
+  color: #212529;
+
+  font-size: 0.875rem;
+  font-weight: bold;
+
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.open-modal-btn:hover,
+.open-modal-btn:active {
+  background-color: #e8e9a2;
+} */
+
+.dropdown-menu {
+  display: block;
+}
+
+.category-btn {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  padding-left: 2rem;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.category-btn:hover {
+  background-color: #6b6b6b;
+}

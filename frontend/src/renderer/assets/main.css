@@ -1,10 +1,8 @@
 @import './base.css';
 
 body {
-  overflow: auto;
-  background-size: cover;
+  display: flex;
   user-select: none;
-  padding: 2rem;
 
   background-color: #343a40;
 }
@@ -20,16 +18,10 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-h1 {
-  color: #ced4da;
-  font-size: 2.3rem;
-  font-weight: 600;
-  display: flex;
-  justify-content: center;
-}
-
 .notes-container {
-  margin-top: 3rem;
+  flex-grow: 1;
+  overflow-y: auto;
+  margin: 2rem 0;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -44,13 +36,15 @@ h1 {
   scroll-snap-type: y mandatory;
 }
 
-#notes-container::-webkit-scrollbar {
+.notes-container::-webkit-scrollbar {
   display: none;
 }
 
 .note-wrapper {
   box-shadow: 19px 25px 47px -19px rgba(0, 0, 0, 0.56);
   position: relative;
+  max-height: 300px;
+  max-width: 300px;
 }
 
 .glue-strip {
@@ -84,10 +78,12 @@ h1 {
   overflow: auto;
 
   padding: 2rem 2rem;
-  min-height: 300px;
-  max-height: 300px;
+  width: 300px;
+  height: 300px;
+  /* min-height: 300px;
+
   min-width: 300px;
-  max-width: 300px;
+  max-width: 300px; */
 }
 
 .note::-webkit-scrollbar {
@@ -124,7 +120,7 @@ h1 {
 
 /* Create note section */
 
-.open-modal-btn {
+/* .open-modal-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -146,7 +142,7 @@ h1 {
 .open-modal-btn:hover,
 .open-modal-btn:active {
   background-color: #e8e9a2;
-}
+} */
 
 .modal {
   display: none;
@@ -269,6 +265,10 @@ h1 {
   color: #fff;
   cursor: pointer;
   transition: all 0.3s;
+}
+
+.hidden {
+  display: none;
 }
 
 @media (max-width: 720px) {
