@@ -267,14 +267,55 @@ body::-webkit-scrollbar {
   transition: all 0.3s;
 }
 
-.hidden {
+.note-bar {
+  font-family: 'Courier New', Courier, monospace;
+
+  display: flex;
+  flex-direction: column;
+
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: scroll;
+
+  min-width: 250px;
+  background-color: #feff9c;
+}
+
+.note-bar::-webkit-scrollbar {
   display: none;
+}
+
+.note-bar-preview {
+  width: 100%;
+  background-color: brown;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  padding: 0.5rem;
+}
+
+.note-bar-preview:hover {
+  background-color: rgb(130, 33, 33);
+}
+
+.note-bar-preview > h2 {
+  font-size: large;
+  font-weight: bold;
+}
+
+.note-bar-preview > p {
+  margin-top: 0.2rem;
+  font-size: small;
 }
 
 @media (max-width: 720px) {
   p {
     font-size: 20px;
   }
+}
+
+.hidden {
+  display: none;
 }
 
 /* @media (max-width: 620px) {
