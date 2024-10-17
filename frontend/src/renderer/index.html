@@ -3,8 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/frontend/node_modules/quill/dist/quill.snow.css" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/navbar.css" />
     <link rel="stylesheet" href="./assets/main.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
 
     <title>Note Manager</title>
   </head>
@@ -20,45 +30,59 @@
       </div>
     </nav>
 
-    <div id="note-bar" class="note-bar hidden">
-      <!-- <div class="note-bar-preview">
-        <h2 title="Neue Test Note">Neue Test Note</h2>
-        <p>Your new Notebook</p>
+    <div id="notebook-container" class="notebook-container">
+      <div id="note-bar" class="note-bar"></div>
+
+      <div id="notebook-top-bar" class="notebook-top-bar">
+        <button id="new-notebook-btn" class="new-notebook-btn">New Notebook</button>
       </div>
 
-      <div class="note-bar-preview">
-        <h2 title="Neue Test Note">Neue Test Note</h2>
-        <p>Your new Notebook</p>
+      <div class="editor">
+        <div id="toolbar-container">
+          <span class="ql-formats">
+            <select class="ql-font"></select>
+            <select class="ql-size"></select>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-bold"></button>
+            <button class="ql-italic"></button>
+            <button class="ql-underline"></button>
+            <button class="ql-strike"></button>
+          </span>
+          <span class="ql-formats">
+            <select class="ql-color"></select>
+            <select class="ql-background"></select>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-script" value="sub"></button>
+            <button class="ql-script" value="super"></button>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-header" value="1"></button>
+            <button class="ql-header" value="2"></button>
+            <button class="ql-blockquote"></button>
+            <button class="ql-code-block"></button>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-list" value="ordered"></button>
+            <button class="ql-list" value="bullet"></button>
+            <button class="ql-indent" value="-1"></button>
+            <button class="ql-indent" value="+1"></button>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-direction" value="rtl"></button>
+            <select class="ql-align"></select>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-link"></button>
+            <button class="ql-formula"></button>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-clean"></button>
+          </span>
+        </div>
+        <div id="editor"></div>
       </div>
-
-      <div class="note-bar-preview">
-        <h2 title="Neue Test Note">Neue Test Note</h2>
-        <p>Your new Notebook</p>
-      </div>
-
-      <div class="note-bar-preview">
-        <h2 title="Neue Test Note">Neue Test Note</h2>
-        <p>Your new Notebook</p>
-      </div>
-
-      <div class="note-bar-preview">
-        <h2 title="Neue Test Note">Neue Test Note</h2>
-        <p>Your new Notebook</p>
-      </div>
-
-      <div class="note-bar-preview">
-        <h2 title="Neue Test Note">Neue Test Note</h2>
-        <p>Your new Notebook</p>
-      </div>
-
-      <div class="note-bar-preview">
-        <h2 title="Neue Test Note">Neue Test Note</h2>
-        <p>Your new Notebook</p>
-      </div> -->
-    </div>
-
-    <div id="notebook-top-bar" class="notebook-top-bar hidden">
-      <button id="new-notebook-btn" class="new-notebook-btn">New Notebook</button>
     </div>
 
     <div id="notes-container" class="notes-container hidden"></div>
@@ -85,5 +109,6 @@
     <script src="./src/navbar.ts" type="module"></script>
     <script src="./src/renderer.ts" type="module"></script>
     <script src="./src/notebook/notebookPreview.ts" type="module"></script>
+    <script src="./src/notebook/editor.ts" type="module"></script>
   </body>
 </html>
