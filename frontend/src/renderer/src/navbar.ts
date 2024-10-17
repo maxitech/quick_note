@@ -1,6 +1,6 @@
 const dropdownBtn = document.getElementById('dropdown-btn') as HTMLButtonElement
 const dropdownMenu = document.getElementById('dropdown-menu') as HTMLDivElement
-const categoryBtn = document.getElementById('category-btn') as HTMLButtonElement
+const stickyNoteBtn = document.getElementById('sticky-note-btn') as HTMLButtonElement
 const notebookBtn = document.getElementById('notebook-btn') as HTMLButtonElement
 const notesContainer = document.getElementById('notes-container') as HTMLDivElement
 const noteBar = document.getElementById('note-bar') as HTMLDivElement
@@ -11,14 +11,18 @@ dropdownBtn.addEventListener('click', () => {
   dropdownBtn.classList.toggle('nav-dropdown-shadow')
 })
 
-categoryBtn.addEventListener('click', () => {
+stickyNoteBtn.addEventListener('click', () => {
   notesContainer.classList.toggle('hidden')
   noteBar.classList.add('hidden')
   notebookTopBar.classList.add('hidden')
+  stickyNoteBtn.classList.toggle('btn-active')
+  notebookBtn.classList.remove('btn-active')
 })
 
 notebookBtn.addEventListener('click', () => {
   noteBar.classList.toggle('hidden')
   notesContainer.classList.add('hidden')
   notebookTopBar.classList.toggle('hidden')
+  notebookBtn.classList.toggle('btn-active')
+  stickyNoteBtn.classList.remove('btn-active')
 })
