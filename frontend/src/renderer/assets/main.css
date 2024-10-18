@@ -3,7 +3,6 @@
 body {
   display: flex;
   user-select: none;
-
   background-color: #343a40;
 }
 
@@ -80,10 +79,6 @@ body::-webkit-scrollbar {
   padding: 2rem 2rem;
   width: 300px;
   height: 300px;
-  /* min-height: 300px;
-
-  min-width: 300px;
-  max-width: 300px; */
 }
 
 .note::-webkit-scrollbar {
@@ -267,6 +262,7 @@ body::-webkit-scrollbar {
   transition: all 0.3s;
 }
 
+/* Notebook */
 .notebook-container {
   display: grid;
   grid-template-columns: 250px 1fr;
@@ -275,7 +271,8 @@ body::-webkit-scrollbar {
     'side-bar top-bar'
     'side-bar editor';
 
-  max-width: 100%;
+  width: 100%;
+  height: 100vh;
 }
 
 .note-bar {
@@ -340,7 +337,16 @@ body::-webkit-scrollbar {
   grid-area: editor;
   background-color: #fff;
   color: #343a40;
-  height: 500px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: hidden;
+}
+
+#editor {
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
 }
 
 @media (max-width: 720px) {
