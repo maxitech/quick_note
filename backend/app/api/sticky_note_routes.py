@@ -8,15 +8,15 @@ from schemas import NoteSchema, NoteUpdateSchema
 notes_repo = NoteRepository()
 
 
-router = APIRouter()
+sticky_note_router = APIRouter()
 
 
-@router.get('/')
+@sticky_note_router.get('/')
 def read_root():
     return RedirectResponse(url='/docs')
 
 
-@router.get('/notes')
+@sticky_note_router.get('/notes')
 def get_notes():
     notes = notes_repo.get_all_notes()
     if notes: 
@@ -24,7 +24,7 @@ def get_notes():
     raise HTTPException(status_code=404, detail='No notes yet')
 
 
-@router.get('/notes/{note_id}')
+@sticky_note_router.get('/notes/{note_id}')
 def get_note(note_id: str):
     note = notes_repo.get_note_by_id(note_id=note_id)
     if note: 
@@ -32,7 +32,7 @@ def get_note(note_id: str):
     raise HTTPException(status_code=404, detail='Note not found')
 
 
-@router.post('/notes')
+@sticky_note_router.post('/notes')
 def create_note(note: NoteSchema):
     new_note = notes_repo.create_note(note=note)
     if new_note:
@@ -40,7 +40,7 @@ def create_note(note: NoteSchema):
     raise HTTPException(status_code=500, detail='Failed to create note')
 
 
-@router.patch('/notes/{note_id}')
+@sticky_note_router.patch('/notes/{note_id}')
 def update_note(note_id: str, note_update: NoteUpdateSchema):
     updated_note = notes_repo.update_note(note_id=note_id, updated_data=note_update)
     if updated_note:
@@ -48,7 +48,7 @@ def update_note(note_id: str, note_update: NoteUpdateSchema):
     raise HTTPException(status_code=400, detail='Update failed')
 
 
-@router.delete('/notes/{note_id}')
+@sticky_note_router.delete('/notes/{note_id}')
 def del_note(note_id: str):
     deleted_note = notes_repo.delete_note(note_id=note_id)
     if deleted_note:

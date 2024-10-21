@@ -1,1 +1,1 @@
-from .routes import router
+from .sticky_note_routes import sticky_note_router
