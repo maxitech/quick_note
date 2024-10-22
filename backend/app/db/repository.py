@@ -1,66 +1,76 @@
 import json 
 import os
 from uuid import uuid4
+from typing import  Union
 
-from schemas import NoteSchema, NoteUpdateSchema
+from schemas import NoteSchema, NoteUpdateSchema, NotebookSchema, NotebookUpdateSchema
+
 
 class Repository: 
-    def __init__(self, filename='notes.json') -> None:
+    def __init__(self, filename: str) -> None:
         self.filename = os.path.join(os.path.dirname(__file__), filename)
         
         
-    def get_all_notes(self) -> list:
+    def _get_all(self) -> list[dict]:
         try:
             with open(self.filename, 'r', encoding='utf-8') as file: 
                 return json.load(file)
         except FileNotFoundError:
             return []
+        
+        
+    def _save_all(self, items: list[dict]) -> None:
+        with open(self.filename, 'w', encoding='utf-8') as file:
+            json.dump(items, file, ensure_ascii=False, indent=4)
     
 
-    def get_note_by_id(self, note_id: str) -> dict:
-        notes = self.get_all_notes()
-        return next((note for note in notes if note['id'] == note_id), None)
+    def get_all(self) -> list[dict]: 
+        return self._get_all()
+    
+
+    def get_by_id(self, item_id: str) -> dict:
+        items = self._get_all()
+        return next((item for item in items if item['id'] == item_id), None)
 
     
-    def create_note(self, note: NoteSchema) -> dict:
-        notes = self.get_all_notes()
-        new_note = note.model_dump()
-        new_note['id'] = str(uuid4())
-        notes.append(new_note)
-        self._save_notes(notes=notes)
-        return new_note
+    def create(self, item_data: Union[NoteSchema, NotebookSchema]) -> dict:
+        items = self._get_all()
+        new_item = item_data.model_dump()
+        new_item['id'] = str(uuid4())
+        items.append(new_item)
+        self._save_all(items=items)
+        return new_item
     
     
-    def update_note(self, note_id: str, updated_data: NoteUpdateSchema) -> dict: 
-        notes = self.get_all_notes()
-        note = self.get_note_by_id(note_id=note_id)
+    def update(self, item_id: str, updated_data: Union[NoteUpdateSchema, NotebookUpdateSchema]) -> dict: 
+        items = self._get_all()
+        item = self.get_by_id(item_id=item_id)
+        
+        if not item:
+            return None
         
         if updated_data.title is not None: 
-            note['title'] =  updated_data.title
+            item['title'] =  updated_data.title
         if updated_data.content is not None:
-            note['content'] = updated_data.content
+            item['content'] = updated_data.content
             
-        for i, existing_note in enumerate(notes):
-            if existing_note['id'] == note_id:
-                notes[i] = note
+        for i, existing_item in enumerate(items):
+            if existing_item['id'] == item_id:
+                items[i] = item
                 break
             
-        self._save_notes(notes=notes)
-        return note
+        self._save_all(items=items)
+        return item
         
     
-    def delete_note(self, note_id) -> dict:
-        notes = self.get_all_notes()
-        note_to_del = self.get_note_by_id(note_id=note_id)
+    def delete(self, item_id: str) -> dict:
+        items = self._get_all()
+        item_to_del = self.get_by_id(item_id=item_id)
 
-        if note_to_del:
-            notes = [note for note in notes if note['id'] != note_id]
-            self._save_notes(notes=notes)
-            return note_to_del
+        if item_to_del:
+            items = [item for item in items if item['id'] != item_id]
+            self._save_all(items=items)
+            return item_to_del
+        return None
 
 
-    def _save_notes(self, notes):
-        for note in notes: 
-            note['id'] = str(note['id'])
-        with open(self.filename, 'w', encoding='utf-8') as file:
-            json.dump(notes, file, ensure_ascii=False, indent=4)

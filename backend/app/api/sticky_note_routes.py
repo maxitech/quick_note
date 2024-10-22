@@ -5,7 +5,7 @@ from db import Repository
 from schemas import NoteSchema, NoteUpdateSchema
 
 
-sticky_note_repo = Repository()
+sticky_note_repo = Repository('notes.json')
 
 
 sticky_note_router = APIRouter()
@@ -16,42 +16,37 @@ def read_root():
     return RedirectResponse(url='/docs')
 
 
-@sticky_note_router.get('/notes')
+@sticky_note_router.get('/notes', response_model=list[NoteSchema])  
 def get_notes():
-    notes = sticky_note_repo.get_all_notes()
-    if notes: 
-        return notes
-    raise HTTPException(status_code=404, detail='No notes yet')
+    notes = sticky_note_repo.get_all()
+    return notes
 
 
-@sticky_note_router.get('/notes/{note_id}')
+@sticky_note_router.get('/notes/{note_id}', response_model=NoteSchema)
 def get_note(note_id: str):
-    note = sticky_note_repo.get_note_by_id(note_id=note_id)
-    if note: 
+    note = sticky_note_repo.get_by_id(item_id=note_id)
+    if note:
         return note
     raise HTTPException(status_code=404, detail='Note not found')
 
 
-@sticky_note_router.post('/notes')
+@sticky_note_router.post('/notes', response_model=NoteSchema, status_code=201) 
 def create_note(note: NoteSchema):
-    new_note = sticky_note_repo.create_note(note=note)
-    if new_note:
-        return new_note
-    raise HTTPException(status_code=500, detail='Failed to create note')
+    new_note = sticky_note_repo.create(item_data=note)
+    return new_note  
 
 
-@sticky_note_router.patch('/notes/{note_id}')
+@sticky_note_router.patch('/notes/{note_id}', response_model=NoteSchema)
 def update_note(note_id: str, note_update: NoteUpdateSchema):
-    updated_note = sticky_note_repo.update_note(note_id=note_id, updated_data=note_update)
+    updated_note = sticky_note_repo.update(item_id=note_id, updated_data=note_update)
     if updated_note:
         return updated_note
-    raise HTTPException(status_code=400, detail='Update failed')
+    raise HTTPException(status_code=404, detail='Note not found or update failed')  
 
 
-@sticky_note_router.delete('/notes/{note_id}')
+@sticky_note_router.delete('/notes/{note_id}', status_code=204)
 def del_note(note_id: str):
-    deleted_note = sticky_note_repo.delete_note(note_id=note_id)
+    deleted_note = sticky_note_repo.delete(item_id=note_id)
     if deleted_note:
-        return deleted_note
-    raise HTTPException(status_code=400, detail='Deletion failed')
-     
+        return  
+    raise HTTPException(status_code=404, detail='Note not found')  
