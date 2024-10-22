@@ -4,7 +4,7 @@ from uuid import uuid4
 
 from schemas import NoteSchema, NoteUpdateSchema
 
-class NoteRepository: 
+class Repository: 
     def __init__(self, filename='notes.json') -> None:
         self.filename = os.path.join(os.path.dirname(__file__), filename)
         

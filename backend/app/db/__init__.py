@@ -1,1 +1,1 @@
-from .notes_repository import NoteRepository
+from .repository import Repository

@@ -1,11 +1,11 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import RedirectResponse
 
-from db import NoteRepository
+from db import Repository
 from schemas import NoteSchema, NoteUpdateSchema
 
 
-notes_repo = NoteRepository()
+sticky_note_repo = Repository()
 
 
 sticky_note_router = APIRouter()
@@ -18,7 +18,7 @@ def read_root():
 
 @sticky_note_router.get('/notes')
 def get_notes():
-    notes = notes_repo.get_all_notes()
+    notes = sticky_note_repo.get_all_notes()
     if notes: 
         return notes
     raise HTTPException(status_code=404, detail='No notes yet')
@@ -26,7 +26,7 @@ def get_notes():
 
 @sticky_note_router.get('/notes/{note_id}')
 def get_note(note_id: str):
-    note = notes_repo.get_note_by_id(note_id=note_id)
+    note = sticky_note_repo.get_note_by_id(note_id=note_id)
     if note: 
         return note
     raise HTTPException(status_code=404, detail='Note not found')
@@ -34,7 +34,7 @@ def get_note(note_id: str):
 
 @sticky_note_router.post('/notes')
 def create_note(note: NoteSchema):
-    new_note = notes_repo.create_note(note=note)
+    new_note = sticky_note_repo.create_note(note=note)
     if new_note:
         return new_note
     raise HTTPException(status_code=500, detail='Failed to create note')
@@ -42,7 +42,7 @@ def create_note(note: NoteSchema):
 
 @sticky_note_router.patch('/notes/{note_id}')
 def update_note(note_id: str, note_update: NoteUpdateSchema):
-    updated_note = notes_repo.update_note(note_id=note_id, updated_data=note_update)
+    updated_note = sticky_note_repo.update_note(note_id=note_id, updated_data=note_update)
     if updated_note:
         return updated_note
     raise HTTPException(status_code=400, detail='Update failed')
@@ -50,7 +50,7 @@ def update_note(note_id: str, note_update: NoteUpdateSchema):
 
 @sticky_note_router.delete('/notes/{note_id}')
 def del_note(note_id: str):
-    deleted_note = notes_repo.delete_note(note_id=note_id)
+    deleted_note = sticky_note_repo.delete_note(note_id=note_id)
     if deleted_note:
         return deleted_note
     raise HTTPException(status_code=400, detail='Deletion failed')
