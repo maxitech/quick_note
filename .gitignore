@@ -317,6 +317,7 @@ sftp-config.json
 
 ### Custom ###
 notes.json
+notebooks.json
 node_modules
 dist
 out
