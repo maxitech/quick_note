@@ -298,10 +298,15 @@ body::-webkit-scrollbar {
   grid-area: side-bar;
   width: 100%;
   background-color: brown;
-  border-bottom: 2px solid;
-  border-right: 2px solid;
-  padding: 0.5rem;
+  text-align: left;
+  border: none;
+  border-bottom: 2px solid gray;
+  padding: 0.8rem;
   cursor: pointer;
+}
+
+.note-bar-preview > h2 {
+  margin-bottom: 0.5rem;
 }
 
 .note-bar-preview > h2,
