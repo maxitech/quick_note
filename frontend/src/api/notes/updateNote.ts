@@ -1,4 +1,4 @@
-import { Note } from '../types/note'
+import { Note } from '../../types/note'
 
 export default async function updateNote(note: Note): Promise<void> {
   const response = await fetch(`http://127.0.0.1:8000/notes/${note.id}`, {
