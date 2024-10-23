@@ -301,6 +301,14 @@ body::-webkit-scrollbar {
   border-bottom: 2px solid;
   border-right: 2px solid;
   padding: 0.5rem;
+  cursor: pointer;
+}
+
+.note-bar-preview > h2,
+.note-bar-preview p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .note-bar-preview:hover {
