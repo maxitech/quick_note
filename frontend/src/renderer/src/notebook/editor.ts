@@ -32,7 +32,9 @@ async function fetchNotebooks(): Promise<void> {
   const notebooks = await getNotebooks()
   noteBar.innerHTML = ''
   notebooks.forEach((notebook) => {
-    generateNotebookPreview(notebook.id, notebook.title, notebook.content.ops[0].insert)
+    const fullText = notebook.content.ops[0].insert
+    const firstLine = fullText.split('\n')[0]
+    generateNotebookPreview(notebook.id, firstLine, fullText)
   })
 }
 fetchNotebooks()
