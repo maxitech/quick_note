@@ -49,8 +49,9 @@ class Repository:
         if not item:
             return None
         
-        if updated_data.title is not None: 
-            item['title'] =  updated_data.title
+        if isinstance(updated_data, NoteUpdateSchema):
+            if updated_data.title is not None: 
+                item['title'] =  updated_data.title
         if updated_data.content is not None:
             item['content'] = updated_data.content
             
