@@ -81,7 +81,6 @@ const renderNotes = async (): Promise<void> => {
 
           if (updatedNote.title !== previousTitle || updatedNote.content !== previousContent) {
             await updateNote(updatedNote)
-            // Wenn erfolgreich, aktualisiere die vorherigen Werte
             previousTitle = updatedNote.title
             previousContent = updatedNote.content
           } else {
