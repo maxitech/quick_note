@@ -1,5 +1,4 @@
 from fastapi import APIRouter, HTTPException
-from fastapi.responses import RedirectResponse
 
 from db import Repository
 from schemas import NotebookSchema, NotebookUpdateSchema
@@ -9,11 +8,6 @@ notebook_repo = Repository('notebooks.json')
 
 
 notebook_router = APIRouter()
-
-
-@notebook_router.get('/')
-def read_root():
-    return RedirectResponse(url='/docs')
 
 
 @notebook_router.get('/notebooks', response_model=list[NotebookSchema])
