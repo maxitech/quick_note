@@ -1,45 +1,62 @@
-import Quill from 'quill'
-import { Delta } from 'quill/core'
-import 'quill/dist/quill.snow.css'
-import getNotebook from '../../../api/notebooks/getNotebook'
+import createNotebook from '../../../api/notebooks/createNotebook'
 import getNotebooks from '../../../api/notebooks/getAllNotebooks'
+import getNotebook from '../../../api/notebooks/getNotebook'
+import updateNotebook from '../../../api/notebooks/updateNotebook'
+import { Notebook } from '../../../types/notebook'
+import extractFullText from '../../util/extractFullText'
 
+import Quill from 'quill'
+import 'quill/dist/quill.snow.css'
+import { Delta } from 'quill/core'
+
+let openNotebookId: string | null = null
+let previousContent: Delta | null = null
+
+let quill: Quill
 const noteBar = document.getElementById('note-bar') as HTMLDivElement
 
-const quill = new Quill('#editor', {
-  modules: {
-    syntax: true,
-    toolbar: '#toolbar-container'
-  },
-  placeholder: 'Compose an epic...',
-  theme: 'snow'
-})
+function initQuill(): void {
+  quill = new Quill('#editor', {
+    modules: {
+      syntax: true,
+      toolbar: '#toolbar-container'
+    },
+    placeholder: 'Compose an epic...',
+    theme: 'snow'
+  })
+}
+initQuill()
 
 function generateNotebookPreview(id: string, title: string, content: string): void {
   const notebookPreview = document.createElement('button')
   notebookPreview.classList.add('note-bar-preview')
   notebookPreview.dataset.id = id
 
+  const displayTitle = title && title.trim() !== '' ? title.trim() : 'No Title'
+  const displayContent = content && content.trim() !== '' ? content.trim() : 'No Content'
+
   notebookPreview.innerHTML = `
-    <h2 title="${title}">${title}</h2>
-    <p>${content}</p>
+    <h2 title="${displayTitle}">${displayTitle}</h2>
+    <p>${displayContent}</p>
   `
 
   noteBar?.insertBefore(notebookPreview, noteBar.firstChild)
 }
 
-async function fetchNotebooks(): Promise<void> {
+export default async function fetchNotebooks(): Promise<void> {
   const notebooks = await getNotebooks()
   noteBar.innerHTML = ''
   notebooks.forEach((notebook) => {
-    const fullText = notebook.content.ops[0].insert
+    const fullText = extractFullText(notebook)
     const firstLine = fullText.split('\n')[0]
-    generateNotebookPreview(notebook.id, firstLine, fullText)
-  })
-}
-fetchNotebooks()
+    const secondLine = fullText.split('\n')[1]
 
-let openNotebookId: string | null = null
+    generateNotebookPreview(notebook.id, firstLine, secondLine)
+  })
+
+  if (notebooks.length === 0) return
+  openNotebook(notebooks[notebooks.length - 1].id)
+}
 
 function handleNotebookClick(e: MouseEvent): void {
   const target = e.target as HTMLElement
@@ -63,7 +80,63 @@ async function openNotebook(id: string): Promise<void> {
   const notebook = await getNotebook(id)
   if (!notebook) return
 
+  openNotebookId = id
+
   const delta = notebook.content as Delta
   quill.setContents(delta)
   quill.focus()
+
+  previousContent = delta
 }
+
+async function saveNotebook(): Promise<void> {
+  const newContent = quill.getContents()
+  const newNotebook: Notebook = {
+    id: '',
+    content: newContent
+  }
+
+  if (openNotebookId) {
+    if (previousContent && JSON.stringify(previousContent) !== JSON.stringify(newContent)) {
+      newNotebook.id = openNotebookId
+      try {
+        await updateNotebook(newNotebook)
+      } catch (error) {
+        console.error('Failed to update notebook:', error)
+      }
+    } else {
+      // no changes
+      return
+    }
+  } else {
+    try {
+      await createNotebook(newNotebook)
+    } catch (error) {
+      console.error('Failed to create notebook:', error)
+    }
+  }
+
+  await fetchNotebooks()
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await fetchNotebooks()
+})
+
+const saveNotebookBtn = document.getElementById('save-notebook-btn') as HTMLButtonElement
+saveNotebookBtn.addEventListener('click', async () => {
+  await saveNotebook()
+})
+
+window.addEventListener('keydown', async (event: KeyboardEvent) => {
+  if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+    event.preventDefault()
+    await saveNotebook()
+  }
+})
+
+const newNotebookBtn = document.getElementById('new-notebook-btn') as HTMLButtonElement
+newNotebookBtn.addEventListener('click', () => {
+  quill.setContents([])
+  openNotebookId = null
+})
