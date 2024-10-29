@@ -317,8 +317,10 @@ sftp-config.json
 
 ### Custom ###
 notes.json
+notebooks.json
 node_modules
 dist
 out
 .DS_Store
 *.log*
+.todo
