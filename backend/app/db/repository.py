@@ -42,7 +42,7 @@ class Repository:
         return new_item
     
     
-    def update(self, item_id: str, updated_data: Union[NoteUpdateSchema, NotebookUpdateSchema]) -> dict: 
+    def update(self, item_id: str, updated_data: Union[NoteUpdateSchema, NotebookUpdateSchema]) -> dict:
         items = self._get_all()
         item = self.get_by_id(item_id=item_id)
         
@@ -55,11 +55,9 @@ class Repository:
         if updated_data.content is not None:
             item['content'] = updated_data.content
             
-        for i, existing_item in enumerate(items):
-            if existing_item['id'] == item_id:
-                items[i] = item
-                break
-            
+        items = [existing_item for existing_item in items if existing_item['id'] != item_id]
+        items.append(item)
+        
         self._save_all(items=items)
         return item
         
