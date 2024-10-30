@@ -316,7 +316,8 @@ body::-webkit-scrollbar {
   text-overflow: ellipsis;
 }
 
-.note-bar-preview:hover {
+.note-bar-preview:hover,
+.note-bar-preview-active {
   background-color: rgb(130, 33, 33);
 }
 
