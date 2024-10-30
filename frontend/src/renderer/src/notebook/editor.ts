@@ -8,6 +8,7 @@ import extractFullText from '../../util/extractFullText'
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 import { Delta } from 'quill/core'
+import deleteNotebook from '../../../api/notebooks/deleteNotebook'
 
 let openNotebookId: string | null = null
 let previousContent: Delta | null = null
@@ -55,7 +56,15 @@ export default async function fetchNotebooks(): Promise<void> {
   })
 
   if (notebooks.length === 0) return
-  openNotebook(notebooks[notebooks.length - 1].id)
+  const latestNotebookId = notebooks[notebooks.length - 1].id
+  openNotebook(latestNotebookId)
+
+  const latestNotebookElement = document.querySelector(
+    `[data-id="${latestNotebookId}"]`
+  ) as HTMLButtonElement
+  if (latestNotebookElement) {
+    latestNotebookElement.classList.add('note-bar-preview-active')
+  }
 }
 
 function handleNotebookClick(e: MouseEvent): void {
@@ -64,6 +73,13 @@ function handleNotebookClick(e: MouseEvent): void {
 
   if (notebookPreview) {
     e.stopPropagation()
+
+    const allNotebookPreviews = document.querySelectorAll('.note-bar-preview')
+    allNotebookPreviews.forEach((preview) => {
+      preview.classList.remove('note-bar-preview-active')
+    })
+    notebookPreview.classList.add('note-bar-preview-active')
+
     const clickedNotebookId = notebookPreview.dataset.id as string
 
     if (openNotebookId === clickedNotebookId) return
@@ -139,4 +155,12 @@ const newNotebookBtn = document.getElementById('new-notebook-btn') as HTMLButton
 newNotebookBtn.addEventListener('click', () => {
   quill.setContents([])
   openNotebookId = null
+})
+
+const delBtn = document.getElementById('delete-nb-btn') as HTMLButtonElement
+delBtn.addEventListener('click', async () => {
+  if (openNotebookId) {
+    await deleteNotebook(openNotebookId)
+    await fetchNotebooks()
+  }
 })
