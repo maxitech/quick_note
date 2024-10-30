@@ -44,7 +44,7 @@ function generateNotebookPreview(id: string, title: string, content: string): vo
   noteBar?.insertBefore(notebookPreview, noteBar.firstChild)
 }
 
-export default async function fetchNotebooks(): Promise<void> {
+async function fetchNotebooks(): Promise<void> {
   const notebooks = await getNotebooks()
   noteBar.innerHTML = ''
   notebooks.forEach((notebook) => {
