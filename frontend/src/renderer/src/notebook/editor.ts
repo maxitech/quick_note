@@ -46,6 +46,7 @@ function generateNotebookPreview(id: string, title?: string, content?: string): 
 }
 
 async function fetchNotebooks(): Promise<void> {
+  updateTopBarTitle()
   const notebooks = await getNotebooks()
   noteBar.innerHTML = ''
   notebooks.forEach((notebook) => {
@@ -163,6 +164,9 @@ const delBtn = document.getElementById('delete-nb-btn') as HTMLButtonElement
 delBtn.addEventListener('click', async () => {
   if (openNotebookId) {
     await deleteNotebook(openNotebookId)
+    openNotebookId = null
     await fetchNotebooks()
   }
+  quill.setContents([])
+  updateTopBarTitle()
 })
