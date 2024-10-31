@@ -276,8 +276,6 @@ body::-webkit-scrollbar {
 }
 
 .note-bar {
-  font-family: 'Courier New', Courier, monospace;
-
   display: flex;
   flex-direction: column;
 
@@ -310,7 +308,8 @@ body::-webkit-scrollbar {
 }
 
 .note-bar-preview > h2,
-.note-bar-preview p {
+.note-bar-preview p,
+.top-bar-title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -335,6 +334,7 @@ body::-webkit-scrollbar {
   grid-area: top-bar;
 
   display: flex;
+  align-items: center;
   justify-content: end;
 
   background-color: #b8b8b8;
@@ -342,9 +342,20 @@ body::-webkit-scrollbar {
   width: 100%;
 }
 
+.top-bar-title {
+  margin-left: 2rem;
+  margin-right: auto;
+  max-width: 200px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #000;
+  font-weight: bold;
+}
+
 .new-notebook-btn {
   background-color: transparent;
   cursor: pointer;
+  height: 100%;
+  padding: 0 0.875rem;
 }
 
 .editor {
