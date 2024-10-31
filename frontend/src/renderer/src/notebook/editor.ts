@@ -2,13 +2,14 @@ import createNotebook from '../../../api/notebooks/createNotebook'
 import getNotebooks from '../../../api/notebooks/getAllNotebooks'
 import getNotebook from '../../../api/notebooks/getNotebook'
 import updateNotebook from '../../../api/notebooks/updateNotebook'
+import deleteNotebook from '../../../api/notebooks/deleteNotebook'
 import { Notebook } from '../../../types/notebook'
-import extractFullText from '../../util/extractFullText'
+import extractFullText from '../../util/notebook/extractFullText'
+import updateTopBarTitle from '../../util/notebook/updateTopBarTitle'
 
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 import { Delta } from 'quill/core'
-import deleteNotebook from '../../../api/notebooks/deleteNotebook'
 
 let openNotebookId: string | null = null
 let previousContent: Delta | null = null
@@ -28,7 +29,7 @@ function initQuill(): void {
 }
 initQuill()
 
-function generateNotebookPreview(id: string, title: string, content: string): void {
+function generateNotebookPreview(id: string, title?: string, content?: string): void {
   const notebookPreview = document.createElement('button')
   notebookPreview.classList.add('note-bar-preview')
   notebookPreview.dataset.id = id
@@ -48,10 +49,7 @@ async function fetchNotebooks(): Promise<void> {
   const notebooks = await getNotebooks()
   noteBar.innerHTML = ''
   notebooks.forEach((notebook) => {
-    const fullText = extractFullText(notebook)
-    const firstLine = fullText.split('\n')[0]
-    const secondLine = fullText.split('\n')[1]
-
+    const { firstLine, secondLine } = extractFullText(notebook)
     generateNotebookPreview(notebook.id, firstLine, secondLine)
   })
 
@@ -97,6 +95,9 @@ async function openNotebook(id: string): Promise<void> {
   if (!notebook) return
 
   openNotebookId = id
+
+  const { firstLine } = extractFullText(notebook)
+  updateTopBarTitle(firstLine)
 
   const delta = notebook.content as Delta
   quill.setContents(delta)
@@ -155,6 +156,7 @@ const newNotebookBtn = document.getElementById('new-notebook-btn') as HTMLButton
 newNotebookBtn.addEventListener('click', () => {
   quill.setContents([])
   openNotebookId = null
+  updateTopBarTitle()
 })
 
 const delBtn = document.getElementById('delete-nb-btn') as HTMLButtonElement
