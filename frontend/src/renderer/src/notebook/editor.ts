@@ -82,6 +82,7 @@ function handleNotebookClick(e: MouseEvent): void {
     const clickedNotebookId = notebookPreview.dataset.id as string
 
     if (openNotebookId === clickedNotebookId) return
+    saveNotebook()
 
     openNotebookId = clickedNotebookId
 
