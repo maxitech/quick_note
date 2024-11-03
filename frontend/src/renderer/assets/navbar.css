@@ -29,25 +29,6 @@ nav > button:hover,
   background-color: #757575 !important;
 }
 
-.nav-dropdown-shadow {
-  /* box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75); */
-}
-
-/* .open-modal-btn {
-  color: #212529;
-
-  font-size: 0.875rem;
-  font-weight: bold;
-
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.open-modal-btn:hover,
-.open-modal-btn:active {
-  background-color: #e8e9a2;
-} */
-
 .dropdown-menu {
   display: block;
   height: 100%;

@@ -115,30 +115,6 @@ body::-webkit-scrollbar {
 
 /* Create note section */
 
-/* .open-modal-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
-  padding: 0.625rem;
-  border: none;
-  border-radius: 8px;
-
-  background-color: #feff9c;
-  color: #212529;
-
-  font-size: 0.875rem;
-  font-weight: bold;
-
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.open-modal-btn:hover,
-.open-modal-btn:active {
-  background-color: #e8e9a2;
-} */
-
 .modal {
   display: none;
   position: fixed;
@@ -383,9 +359,3 @@ body::-webkit-scrollbar {
 .hidden {
   display: none;
 }
-
-/* @media (max-width: 620px) {
-}
-
-@media (max-width: 350px) {
-} */
