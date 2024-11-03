@@ -1,8 +1,8 @@
-import getNotes from '../../api/notes/getNotes'
-import deleteNote from '../../api/notes/deleteNote'
-import createNote from '../../api/notes/createNote'
-import updateNote from '../../api/notes/updateNote'
-import { Note } from '../../types/note'
+import getNotes from '../../../api/notes/getNotes'
+import deleteNote from '../../../api/notes/deleteNote'
+import createNote from '../../../api/notes/createNote'
+import updateNote from '../../../api/notes/updateNote'
+import { Note } from '../../../types/note'
 
 const windowType = window.api.getWindowType()
 
