@@ -178,6 +178,9 @@ openModalBtn?.addEventListener('click', openModal)
 
 closeModalBtn.addEventListener('click', closeModal)
 
-modalCreateNoteBtn.addEventListener('click', saveNote)
+modalCreateNoteBtn.addEventListener('click', async (e) => {
+  e.preventDefault()
+  saveNote()
+})
 
 renderNotes()
