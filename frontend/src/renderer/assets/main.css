@@ -20,7 +20,7 @@ body::-webkit-scrollbar {
 .notes-container {
   flex-grow: 1;
   overflow-y: auto;
-  margin: 2rem 0;
+  margin: 4rem 6rem;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -114,6 +114,34 @@ body::-webkit-scrollbar {
 }
 
 /* Create note section */
+.open-modal-btn {
+  position: fixed;
+  top: 1rem;
+  right: 0.875rem;
+  z-index: 999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  padding: 0.625rem;
+  border: none;
+  border-radius: 8px;
+
+  background-color: #feff9c;
+  color: #212529;
+
+  font-size: 0.875rem;
+  font-weight: bold;
+
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.open-modal-btn:hover,
+.open-modal-btn:active {
+  background-color: #e8e9a2;
+}
 
 .modal {
   display: none;
@@ -199,6 +227,7 @@ body::-webkit-scrollbar {
 }
 
 /* sticky modal */
+
 .modal_sticky {
   display: none;
   position: fixed;
