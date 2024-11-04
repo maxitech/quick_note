@@ -6,6 +6,7 @@ import deleteNotebook from '../../../api/notebooks/deleteNotebook'
 import { Notebook } from '../../../types/notebook'
 import extractFullText from '../../util/notebook/extractFullText'
 import updateTopBarTitle from '../../util/notebook/updateTopBarTitle'
+import { currentMode } from '../notes/navbar'
 
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
@@ -147,18 +148,15 @@ saveNotebookBtn.addEventListener('click', async () => {
   await saveNotebook()
 })
 
-window.addEventListener('keydown', async (event: KeyboardEvent) => {
-  if ((event.ctrlKey || event.metaKey) && event.key === 's') {
-    event.preventDefault()
-    await saveNotebook()
-  }
-})
-
-const newNotebookBtn = document.getElementById('new-notebook-btn') as HTMLButtonElement
-newNotebookBtn.addEventListener('click', () => {
+function newNotebook(): void {
   quill.setContents([])
   openNotebookId = null
   updateTopBarTitle()
+}
+
+const newNotebookBtn = document.getElementById('new-notebook-btn') as HTMLButtonElement
+newNotebookBtn.addEventListener('click', () => {
+  newNotebook()
 })
 
 const delBtn = document.getElementById('delete-nb-btn') as HTMLButtonElement
@@ -170,4 +168,18 @@ delBtn.addEventListener('click', async () => {
   }
   quill.setContents([])
   updateTopBarTitle()
+})
+
+window.addEventListener('keydown', async (event: KeyboardEvent) => {
+  if (currentMode !== 'notebooks') return
+
+  if ((event.ctrlKey || event.metaKey) && event.key === 'n') {
+    event.preventDefault()
+    newNotebook()
+  }
+
+  if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+    event.preventDefault()
+    await saveNotebook()
+  }
 })

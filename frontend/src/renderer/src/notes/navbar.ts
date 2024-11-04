@@ -13,6 +13,8 @@ const openNoteModalBtn = document.getElementById('open-modal-btn') as HTMLButton
 //   dropdownBtn.classList.toggle('nav-dropdown-shadow')
 // })
 
+export let currentMode: 'stickyNotes' | 'notebooks' = 'stickyNotes'
+
 stickyNoteBtn.classList.add('btn-active')
 openNoteModalBtn.classList.remove('hidden')
 
@@ -22,6 +24,7 @@ stickyNoteBtn.addEventListener('click', () => {
   notebookContainer.classList.add('hidden')
   notebookBtn.classList.remove('btn-active')
   openNoteModalBtn.classList.remove('hidden')
+  currentMode = 'stickyNotes'
 })
 
 notebookBtn.addEventListener('click', () => {
@@ -29,5 +32,7 @@ notebookBtn.addEventListener('click', () => {
   notebookContainer.classList.remove('hidden')
   notebookBtn.classList.toggle('btn-active')
   stickyNoteBtn.classList.remove('btn-active')
+  notebookBtn.classList.add('btn-active')
   openNoteModalBtn.classList.add('hidden')
+  currentMode = 'notebooks'
 })
