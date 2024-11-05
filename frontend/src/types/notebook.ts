@@ -1,4 +1,10 @@
+import { Delta, Op } from 'quill/core'
+
 export interface Notebook {
   id: string
-  content: object
+  content:
+    | {
+        ops: Op[]
+      }
+    | Delta
 }
