@@ -1,3 +1,4 @@
+import sys
 import json 
 import os
 from uuid import uuid4
@@ -8,7 +9,29 @@ from schemas import NoteSchema, NoteUpdateSchema, NotebookSchema, NotebookUpdate
 
 class Repository: 
     def __init__(self, filename: str) -> None:
-        self.filename = os.path.join(os.path.dirname(__file__), filename)
+        self.filename = self.get_resource_path(filename)
+
+    def get_resource_path(self, filename):
+        if getattr(sys, 'frozen', False):
+            if sys.platform == "win32":
+                base_path = os.path.join(os.path.expanduser("~"), "AppData", "Roaming", "quick_notes")
+            elif sys.platform == "darwin":
+                base_path = os.path.join(os.path.expanduser("~"), "Library", "Application Support", "quick_notes")
+            else:
+                base_path = os.path.join(os.path.expanduser("~"), ".local", "share", "quick_notes")
+        else:
+            base_path = os.path.dirname(__file__)
+        
+        if not os.path.exists(base_path):
+            os.makedirs(base_path)
+            
+        file_path = os.path.join(base_path, filename)
+        
+        if not os.path.exists(file_path):
+            with open(file_path, 'w') as f:
+                json.dump([], f) 
+                
+        return file_path
         
         
     def _get_all(self) -> list[dict]:
