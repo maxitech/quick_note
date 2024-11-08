@@ -5,7 +5,7 @@ import updateNote from '../../../api/notes/updateNote'
 import { Note } from '../../../types/note'
 import { currentMode } from './navbar'
 
-const windowType = window.api.getWindowType()
+const windowType = (window.api as { getWindowType: () => string }).getWindowType()
 
 const notesContainer = document.getElementById('notes-container')
 
