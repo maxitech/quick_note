@@ -324,3 +324,4 @@ out
 .DS_Store
 *.log*
 .todo
+*.exe
