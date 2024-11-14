@@ -6,11 +6,11 @@ import deleteNotebook from '../../../api/notebooks/deleteNotebook'
 import { Notebook } from '../../../types/notebook'
 import extractFullText from '../../util/notebook/extractFullText'
 import updateTopBarTitle from '../../util/notebook/updateTopBarTitle'
-import { currentMode } from '../notes/navbar'
 
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 import { Delta } from 'quill/core'
+import { getCurrentMode } from '../../util/notes/store'
 
 let openNotebookId: string | null = null
 let previousContent: Delta | null = null
@@ -116,8 +116,16 @@ async function saveNotebook(): Promise<void> {
     content: newContent
   }
 
+  if (!previousContent) return
+  const previousDelta = new Delta(previousContent)
+  const newDelta = new Delta(newContent)
+
+  const deltaDiff = previousDelta.diff(newDelta)
+
+  const hasChanges = deltaDiff.ops.length > 0
+
   if (openNotebookId) {
-    if (previousContent && JSON.stringify(previousContent) !== JSON.stringify(newContent)) {
+    if (hasChanges) {
       newNotebook.id = openNotebookId
       try {
         await updateNotebook(newNotebook)
@@ -171,6 +179,7 @@ delBtn.addEventListener('click', async () => {
 })
 
 window.addEventListener('keydown', async (event: KeyboardEvent) => {
+  const currentMode = getCurrentMode()
   if (currentMode !== 'notebooks') return
 
   if ((event.ctrlKey || event.metaKey) && event.key === 'n') {

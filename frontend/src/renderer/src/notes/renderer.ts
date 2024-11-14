@@ -3,7 +3,7 @@ import deleteNote from '../../../api/notes/deleteNote'
 import createNote from '../../../api/notes/createNote'
 import updateNote from '../../../api/notes/updateNote'
 import { Note } from '../../../types/note'
-import { currentMode } from './navbar'
+import { getCurrentMode } from '../../util/notes/store'
 
 const windowType = (window.api as { getWindowType: () => string }).getWindowType()
 
@@ -156,6 +156,7 @@ const saveNote = async (): Promise<void> => {
 }
 
 window.addEventListener('keydown', async (event: KeyboardEvent) => {
+  const currentMode = getCurrentMode()
   if (currentMode !== 'stickyNotes') return
 
   if ((event.ctrlKey || event.metaKey) && event.key === 'n') {
@@ -171,6 +172,12 @@ window.addEventListener('keydown', async (event: KeyboardEvent) => {
   if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
     event.preventDefault()
     await saveNote()
+  }
+})
+
+window.addEventListener('click', (event: MouseEvent) => {
+  if (event.target === modal) {
+    closeModal()
   }
 })
 

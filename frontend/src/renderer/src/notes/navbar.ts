@@ -1,3 +1,5 @@
+import { setCurrentMode } from '../../util/notes/store'
+
 const stickyNoteBtn = document.getElementById('sticky-note-btn') as HTMLButtonElement
 const notebookBtn = document.getElementById('notebook-btn') as HTMLButtonElement
 const notesContainer = document.getElementById('notes-container') as HTMLDivElement
@@ -13,8 +15,6 @@ const openNoteModalBtn = document.getElementById('open-modal-btn') as HTMLButton
 //   dropdownBtn.classList.toggle('nav-dropdown-shadow')
 // })
 
-export let currentMode: 'stickyNotes' | 'notebooks' = 'stickyNotes'
-
 stickyNoteBtn.classList.add('btn-active')
 openNoteModalBtn.classList.remove('hidden')
 
@@ -24,7 +24,7 @@ stickyNoteBtn.addEventListener('click', () => {
   notebookContainer.classList.add('hidden')
   notebookBtn.classList.remove('btn-active')
   openNoteModalBtn.classList.remove('hidden')
-  currentMode = 'stickyNotes'
+  setCurrentMode('stickyNotes')
 })
 
 notebookBtn.addEventListener('click', () => {
@@ -34,5 +34,5 @@ notebookBtn.addEventListener('click', () => {
   stickyNoteBtn.classList.remove('btn-active')
   notebookBtn.classList.add('btn-active')
   openNoteModalBtn.classList.add('hidden')
-  currentMode = 'notebooks'
+  setCurrentMode('notebooks')
 })
