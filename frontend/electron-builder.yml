@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: frontend
+productName: QuickNote
 directories:
   buildResources: build
 files:
@@ -12,7 +12,8 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: frontend
+  icon: resources/icon.ico
+  executableName: QuickNote
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
