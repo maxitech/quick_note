@@ -11,7 +11,7 @@ base_path = os.path.dirname(os.path.abspath(sys.argv[0]))
 
 # prod
 backend_path = os.path.join(base_path, 'main.exe')
-frontend_path = os.path.join(base_path, './frontend/frontend.exe')
+frontend_path = os.path.join(base_path, './frontend/QuickNote.exe')
 
 backend_process = subprocess.Popen([backend_path], creationflags=subprocess.CREATE_NO_WINDOW)
 
