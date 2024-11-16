@@ -13,7 +13,7 @@ import { Delta } from 'quill/core'
 import { getCurrentMode } from '../../util/notes/store'
 
 let openNotebookId: string | null = null
-let previousContent: Delta | null = null
+let previousContent: Delta = new Delta()
 
 let quill: Quill
 const noteBar = document.getElementById('note-bar') as HTMLDivElement
@@ -116,7 +116,6 @@ async function saveNotebook(): Promise<void> {
     content: newContent
   }
 
-  if (!previousContent) return
   const previousDelta = new Delta(previousContent)
   const newDelta = new Delta(newContent)
 
