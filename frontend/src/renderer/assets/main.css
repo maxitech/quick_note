@@ -290,7 +290,7 @@ body::-webkit-scrollbar {
   overflow-y: scroll;
 
   min-width: 250px;
-  background-color: #feff9c;
+  background-color: #343a40;
 }
 
 .note-bar::-webkit-scrollbar {
@@ -300,7 +300,7 @@ body::-webkit-scrollbar {
 .note-bar-preview {
   grid-area: side-bar;
   width: 100%;
-  background-color: brown;
+  background-color: #bdbdbd;
   text-align: left;
   border: none;
   border-bottom: 2px solid gray;
@@ -322,7 +322,7 @@ body::-webkit-scrollbar {
 
 .note-bar-preview:hover,
 .note-bar-preview-active {
-  background-color: rgb(130, 33, 33);
+  background-color: #757575;
 }
 
 .note-bar-preview > h2 {
