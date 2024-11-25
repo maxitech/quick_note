@@ -7,11 +7,13 @@ nav {
   max-width: 11rem;
   height: 100vh;
 
-  background-color: #bdbdbd;
+  background-color: var(--color-background);
 }
 
 nav > button,
 .nav-btn {
+  font-family: var(--font-roboto);
+  color: var(--color-lightgray);
   text-align: left;
   padding-left: 1.375rem;
   min-height: 1.5rem;
@@ -22,18 +24,19 @@ nav > button,
 
 nav > button:hover,
 .category-btn:hover {
-  background-color: #757575;
+  background-color: var(--color-midgray);
 }
 
 .btn-active {
-  background-color: #757575 !important;
+  background-color: var(--color-midgray) !important;
 }
 
 .dropdown-menu {
+  font-family: var(--font-roboto);
   display: block;
   height: 100%;
-  background-color: #b8b8b8;
-  box-shadow: inset 0px 2px 3px 0px rgba(107, 107, 107, 1);
+  background-color: var(--color-background);
+  box-shadow: inset 0px 2px 3px 0px var(--color-midgray);
 }
 
 .category-btn {
