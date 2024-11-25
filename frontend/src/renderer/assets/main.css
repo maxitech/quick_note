@@ -1,10 +1,16 @@
 @import './base.css';
 
 :root {
-  /* notes */
-  --color-background: #212529;
-  --color-lightgray: #6c757d;
+  --font-roboto: 'Roboto', sans-serif;
+  --font-cursive: 'Handlee', cursive;
 
+  --color-darkgray: #212529;
+  --color-background: #343a40;
+  --color-midgray: #495057;
+  --color-lightgray: #adb5bd;
+  --color-white: #fff;
+
+  /* notes */
   --color-glue-strip: rgba(0, 0, 0, 0.076);
   --color-note-odd: #ff7eb9;
   --color-note-even: #7afcff;
@@ -89,7 +95,7 @@ body::-webkit-scrollbar {
 }
 
 .note {
-  color: var(--ev-c-black-soft);
+  color: var(--color-darkgray);
 
   overflow-wrap: break-word;
   white-space: normal;
@@ -114,6 +120,7 @@ body::-webkit-scrollbar {
 }
 
 .del-btn {
+  color: var(--color-darkgray);
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -148,8 +155,9 @@ body::-webkit-scrollbar {
   border-radius: 8px;
 
   background-color: var(--color-open-modal-btn);
-  color: #212529;
+  color: var(--color-darkgray);
 
+  font-family: var(--font-roboto);
   font-size: 0.875rem;
   font-weight: bold;
 
@@ -182,7 +190,7 @@ body::-webkit-scrollbar {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
 
-  color: var(--ev-c-black-soft);
+  color: var(--color-darkgray);
 }
 
 .close-modal {
@@ -213,9 +221,9 @@ body::-webkit-scrollbar {
 .create-note-form textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-lightgray);
   border-radius: 5px;
-  font-family: 'Handlee', cursive;
+  font-family: var(--font-cursive);
 }
 
 .note-lable {
@@ -235,7 +243,7 @@ body::-webkit-scrollbar {
   margin-top: 1.875rem;
   font-size: 1rem;
   font-weight: bold;
-  color: #fff;
+  color: var(--color-white);
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -261,7 +269,7 @@ body::-webkit-scrollbar {
 .modal-content_sticky {
   background-color: var(--color-modal-content);
   padding: 20px;
-  color: var(--ev-c-black-soft);
+  color: var(--color-darkgray);
 }
 
 .note-lable_sticky {
@@ -281,7 +289,7 @@ body::-webkit-scrollbar {
   margin-top: 0.6rem;
   font-size: 1rem;
   font-weight: bold;
-  color: #fff;
+  color: var(--color-white);
   cursor: pointer;
   transition: all 0.3s;
 }
