@@ -1,9 +1,28 @@
 @import './base.css';
 
+:root {
+  /* notes */
+  --color-background: #212529;
+  --color-lightgray: #6c757d;
+
+  --color-glue-strip: rgba(0, 0, 0, 0.076);
+  --color-note-odd: #ff7eb9;
+  --color-note-even: #7afcff;
+
+  --color-open-modal-btn: #feff9c;
+  --color-open-modal-btn-hover: #e8e9a2;
+
+  --color-modal-btn: #007aff;
+  --color-modal-btn-hover: #005ec2;
+
+  --color-modal: rgba(0, 0, 0, 0.4);
+  --color-modal-content: #feff9c;
+}
+
 body {
   display: flex;
   user-select: none;
-  background-color: #343a40;
+  background-color: var(--color-background);
 }
 
 .sticky-note-style_body {
@@ -51,7 +70,7 @@ body::-webkit-scrollbar {
   z-index: 999;
   width: 300px;
   height: 28px;
-  background-color: rgba(0, 0, 0, 0.076);
+  background-color: var(--color-glue-strip);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.233);
   -webkit-app-region: drag;
 }
@@ -62,11 +81,11 @@ body::-webkit-scrollbar {
 }
 
 .note-wrapper:nth-child(odd) {
-  background-color: #ff7eb9;
+  background-color: var(--color-note-odd);
 }
 
 .note-wrapper:nth-child(even) .note {
-  background-color: #7afcff;
+  background-color: var(--color-note-even);
 }
 
 .note {
@@ -128,7 +147,7 @@ body::-webkit-scrollbar {
   border: none;
   border-radius: 8px;
 
-  background-color: #feff9c;
+  background-color: var(--color-open-modal-btn);
   color: #212529;
 
   font-size: 0.875rem;
@@ -140,13 +159,13 @@ body::-webkit-scrollbar {
 
 .open-modal-btn:hover,
 .open-modal-btn:active {
-  background-color: #e8e9a2;
+  background-color: var(--color-open-modal-btn-hover);
 }
 
 .modal {
   display: none;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: var(--color-modal);
   z-index: 9999;
   top: 0;
   left: 0;
@@ -155,7 +174,7 @@ body::-webkit-scrollbar {
 }
 
 .modal-content {
-  background-color: #feff9c;
+  background-color: var(--color-modal-content);
   margin: 15% auto;
   padding: 20px;
   width: 50%;
@@ -168,7 +187,7 @@ body::-webkit-scrollbar {
 
 .close-modal {
   background-color: transparent;
-  color: #007aff;
+  color: var(--color-modal-btn);
   border: none;
   cursor: pointer;
   margin-left: auto;
@@ -178,7 +197,7 @@ body::-webkit-scrollbar {
 
 .close-modal:hover,
 .close-modal:active {
-  color: #005ec2;
+  color: var(--color-modal-btn-hover);
 }
 
 .modal-content-container {
@@ -208,7 +227,7 @@ body::-webkit-scrollbar {
 
 .add-note-btn {
   padding: 10px 10px;
-  background-color: #007aff;
+  background-color: var(--color-modal-btn);
   border: none;
   border-radius: 8px;
   display: block;
@@ -223,7 +242,7 @@ body::-webkit-scrollbar {
 
 .add-note-btn:hover,
 .add-note-btn:active {
-  background-color: #005ec2;
+  background-color: var(--color-modal-btn-hover);
 }
 
 /* sticky modal */
@@ -231,7 +250,7 @@ body::-webkit-scrollbar {
 .modal_sticky {
   display: none;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: var(--color-modal);
   z-index: 9999;
   top: 0;
   left: 0;
@@ -240,7 +259,7 @@ body::-webkit-scrollbar {
 }
 
 .modal-content_sticky {
-  background-color: #feff9c;
+  background-color: var(--color-modal-content);
   padding: 20px;
   color: var(--ev-c-black-soft);
 }
@@ -254,7 +273,7 @@ body::-webkit-scrollbar {
 
 .add-note-btn_sticky {
   padding: 10px 10px;
-  background-color: #007aff;
+  background-color: var(--color-modal-btn);
   border: none;
   border-radius: 8px;
   display: block;
