@@ -317,7 +317,7 @@ body::-webkit-scrollbar {
   overflow-y: scroll;
 
   min-width: 250px;
-  background-color: #343a40;
+  background-color: var(--color-darkgray);
 }
 
 .note-bar::-webkit-scrollbar {
@@ -325,12 +325,14 @@ body::-webkit-scrollbar {
 }
 
 .note-bar-preview {
+  font-family: var(--font-roboto);
   grid-area: side-bar;
   width: 100%;
-  background-color: #bdbdbd;
+  color: var(--color-lightgray);
+  background-color: var(--color-background);
   text-align: left;
   border: none;
-  border-bottom: 2px solid gray;
+  border-bottom: 2px solid var(--color-darkgray);
   padding: 0.8rem;
   cursor: pointer;
 }
@@ -349,7 +351,7 @@ body::-webkit-scrollbar {
 
 .note-bar-preview:hover,
 .note-bar-preview-active {
-  background-color: #757575;
+  background-color: var(--color-midgray);
 }
 
 .note-bar-preview > h2 {
@@ -369,7 +371,7 @@ body::-webkit-scrollbar {
   align-items: center;
   justify-content: end;
 
-  background-color: #b8b8b8;
+  background-color: var(--color-background);
   height: 2rem;
   width: 100%;
 }
@@ -378,22 +380,34 @@ body::-webkit-scrollbar {
   margin-left: 2rem;
   margin-right: auto;
   max-width: 200px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #000;
-  font-weight: bold;
+  font-family: var(--font-roboto);
+  color: var(--color-lightgray);
 }
 
 .new-notebook-btn {
+  font-family: var(--font-roboto);
+  border: 1px solid var(--color-midgray);
+  color: var(--color-lightgray);
+  font-weight: 600;
   background-color: transparent;
   cursor: pointer;
   height: 100%;
   padding: 0 0.875rem;
 }
 
+.new-notebook-btn:hover,
+.new-notebook-btn:active {
+  background-color: var(--color-midgray);
+}
+
+.new-notebook-btn {
+  transition: all 0.1s;
+}
+
 .editor {
   grid-area: editor;
-  background-color: #fff;
-  color: #343a40;
+  background-color: var(--color-white);
+  color: var(--color-darkgray);
   display: flex;
   flex-direction: column;
   height: 100%;
