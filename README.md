@@ -39,7 +39,7 @@ Developing Quick Note helped me expand my knowledge in several areas:
 
 ### Download and Install
 To install Quick Note on your system, download the setup file from the latest release:  
-➡️ [Download Quick Note v2.0.1](https://github.com/maxitech/quick_note/releases/tag/v2.0.1)
+➡️ [Download Latest version of Quick Note](https://github.com/maxitech/quick_note/releases)
 
 Once downloaded, run the installer and follow the on-screen instructions.
 
