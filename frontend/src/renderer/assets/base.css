@@ -1,6 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Guides:wght@400..700&family=Handlee&family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 
+:root {
+  --font-roboto: 'Roboto', sans-serif;
+  --font-cursive: 'Handlee', cursive;
+
+  --color-darkgray: #212529;
+  --color-background: #343a40;
+  --color-midgray: #495057;
+  --color-lightgray: #adb5bd;
+  --color-white: #fff;
+
+  /* notes */
+  --color-glue-strip: rgba(0, 0, 0, 0.076);
+  --color-note-odd: #ff7eb9;
+  --color-note-even: #7afcff;
+
+  --color-open-modal-btn: #feff9c;
+  --color-open-modal-btn-hover: #e8e9a2;
+
+  --color-modal-btn: #007aff;
+  --color-modal-btn-hover: #005ec2;
+
+  --color-modal: rgba(0, 0, 0, 0.4);
+  --color-modal-content: #feff9c;
+}
+
 *,
 *::before,
 *::after {
@@ -19,7 +44,7 @@ body {
   color: var(--color-text);
   background: var(--color-background);
   line-height: 1.6;
-  font-family: 'Handlee', cursive, 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

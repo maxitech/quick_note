@@ -1,30 +1,5 @@
 @import './base.css';
 
-:root {
-  --font-roboto: 'Roboto', sans-serif;
-  --font-cursive: 'Handlee', cursive;
-
-  --color-darkgray: #212529;
-  --color-background: #343a40;
-  --color-midgray: #495057;
-  --color-lightgray: #adb5bd;
-  --color-white: #fff;
-
-  /* notes */
-  --color-glue-strip: rgba(0, 0, 0, 0.076);
-  --color-note-odd: #ff7eb9;
-  --color-note-even: #7afcff;
-
-  --color-open-modal-btn: #feff9c;
-  --color-open-modal-btn-hover: #e8e9a2;
-
-  --color-modal-btn: #007aff;
-  --color-modal-btn-hover: #005ec2;
-
-  --color-modal: rgba(0, 0, 0, 0.4);
-  --color-modal-content: #feff9c;
-}
-
 body {
   display: flex;
   user-select: none;
@@ -65,6 +40,7 @@ body::-webkit-scrollbar {
 }
 
 .note-wrapper {
+  font-family: var(--font-cursive);
   box-shadow: 19px 25px 47px -19px rgba(0, 0, 0, 0.56);
   position: relative;
   max-height: 300px;
@@ -182,6 +158,7 @@ body::-webkit-scrollbar {
 }
 
 .modal-content {
+  font-family: var(--font-cursive);
   background-color: var(--color-modal-content);
   margin: 15% auto;
   padding: 20px;
