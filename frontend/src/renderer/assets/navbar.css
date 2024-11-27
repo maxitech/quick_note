@@ -12,7 +12,6 @@ nav {
   background-color: var(--color-background);
 }
 
-nav > button,
 .nav-btn {
   font-family: var(--font-roboto);
   color: var(--color-lightgray);
@@ -24,7 +23,7 @@ nav > button,
   cursor: pointer;
 }
 
-nav > button:hover,
+.nav-btn:hover,
 .category-btn:hover {
   background-color: var(--color-midgray);
 }
@@ -52,4 +51,25 @@ nav > button:hover,
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
+}
+
+.settings-btn {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 0.375rem 0.375rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+.settings-icon {
+  stroke: var(--color-lightgray);
+  width: 1.625rem;
+}
+
+.settings-icon:hover {
+  fill: transparent;
+  stroke: var(--color-white);
 }
