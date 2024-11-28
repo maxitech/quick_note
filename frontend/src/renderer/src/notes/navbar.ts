@@ -5,6 +5,7 @@ const notebookBtn = document.getElementById('notebook-btn') as HTMLButtonElement
 const notesContainer = document.getElementById('notes-container') as HTMLDivElement
 const notebookContainer = document.getElementById('notebook-container') as HTMLDivElement
 const openNoteModalBtn = document.getElementById('open-modal-btn') as HTMLButtonElement
+const settingsBtn = document.getElementById('settings-btn') as HTMLButtonElement
 
 // ? Code for a dropdown menu if needed in the future
 // const dropdownBtn = document.getElementById('dropdown-btn') as HTMLButtonElement
@@ -35,4 +36,12 @@ notebookBtn.addEventListener('click', () => {
   notebookBtn.classList.add('btn-active')
   openNoteModalBtn.classList.add('hidden')
   setCurrentMode('notebooks')
+})
+
+settingsBtn.addEventListener('click', () => {
+  notebookContainer.classList.add('hidden')
+  notesContainer.classList.add('hidden')
+  stickyNoteBtn.classList.remove('btn-active')
+  notebookBtn.classList.remove('btn-active')
+  openNoteModalBtn.classList.add('hidden')
 })
