@@ -11,7 +11,7 @@ def get_resource_path(filename: str) -> str:
         else:
             base_path = os.path.join(os.path.expanduser("~"), ".local", "share", "quick_notes")
     else:
-        base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "db"))
+        base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "app_data"))
         
     if not os.path.exists(base_path):
         os.makedirs(base_path)
