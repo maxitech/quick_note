@@ -7,7 +7,7 @@ base_path = os.path.dirname(os.path.abspath(sys.argv[0]))
 
 # dev
 # backend_path = os.path.join(base_path, './backend/dist/main.exe')
-# frontend_path = os.path.join(base_path, './frontend/dist/win-unpacked/frontend.exe')
+# frontend_path = os.path.join(base_path, './frontend/dist/win-unpacked/QuickNote.exe')
 
 # prod
 backend_path = os.path.join(base_path, 'main.exe')
