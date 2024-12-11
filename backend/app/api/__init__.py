@@ -1,2 +1,3 @@
 from .sticky_note_routes import sticky_note_router
 from .notebook_routes import notebook_router
+from .settings_routes import settings_router
