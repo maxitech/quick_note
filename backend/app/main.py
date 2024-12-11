@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api import sticky_note_router, notebook_router
+from api import sticky_note_router, notebook_router, settings_router
 
 app = FastAPI()
 
@@ -16,6 +16,7 @@ app.add_middleware(
 
 app.include_router(sticky_note_router)
 app.include_router(notebook_router)
+app.include_router(settings_router)
 
 if __name__ == '__main__': 
     import uvicorn
