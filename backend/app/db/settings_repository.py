@@ -10,17 +10,8 @@ class SettingsRepository:
         self.filename = get_resource_path(filename)
 
     def initialize_settings_with_defaults(self, default_values: SettingsSchema) -> None:
-        file_path = self.filename
-        file = Path(file_path)
-
-        try: 
-            with open(file, 'r', encoding='utf-8') as f: 
-                current_values = json.load(f) 
-            if not isinstance(current_values, dict): 
-                raise ValueError("JSON content is not a dictionary") 
-        except (json.JSONDecodeError, FileNotFoundError, ValueError): 
-            current_values = {}
-
+        current_values = self._get_settings()
+        
         try:
             current_settings = SettingsSchema(**current_values)
         except ValidationError:
@@ -30,22 +21,25 @@ class SettingsRepository:
         merged_values.update({k: v for k, v in current_settings.model_dump().items() if v is not None})
 
         final_settings = SettingsSchema(**merged_values)
-
-        with open(file, 'w', encoding='utf-8') as f:
-            json.dump(final_settings.model_dump(), f, indent=4, ensure_ascii=False)
+        
+        self._save_settings(dict(final_settings))
 
     
     def _get_settings(self) -> SettingsSchema: 
         try:
             with open(self.filename, "r", encoding="utf-8") as file:
                 return json.load(file)
-        except FileNotFoundError:
-            return None
+        except (json.JSONDecodeError, FileNotFoundError):
+            return {}
     
     
     def get_settings(self) -> SettingsSchema:
-        return self._get_settings()
-    
+        raw_settings = self._get_settings()
+        try:
+            return SettingsSchema(**raw_settings)
+        except ValidationError:
+            return SettingsSchema()
+
     
     def update_settings(self, payload: SettingsSchema) -> SettingsSchema: 
         curr_settings = self._get_settings()
