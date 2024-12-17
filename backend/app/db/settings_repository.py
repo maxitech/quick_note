@@ -33,3 +33,16 @@ class SettingsRepository:
 
         with open(file, 'w', encoding='utf-8') as f:
             json.dump(final_settings.model_dump(), f, indent=4, ensure_ascii=False)
+
+    
+    def _get_settings(self) -> SettingsSchema: 
+        try:
+            with open(self.filename, "r", encoding="utf-8") as file:
+                return json.load(file)
+        except FileNotFoundError:
+            return None
+    
+    
+    def get_settings(self) -> SettingsSchema:
+        return self._get_settings()
+    
