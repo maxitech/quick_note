@@ -46,3 +46,26 @@ class SettingsRepository:
     def get_settings(self) -> SettingsSchema:
         return self._get_settings()
     
+    
+    def update_settings(self, payload: SettingsSchema) -> SettingsSchema: 
+        curr_settings = self._get_settings()
+
+        curr_settings_dict = dict(curr_settings)
+        payload_dict = dict(payload)
+        
+        if curr_settings_dict == payload_dict:
+            return curr_settings
+        
+        try:
+            updated_settings = SettingsSchema(**{**curr_settings_dict, **payload_dict})
+        except ValidationError as e:
+            raise ValueError(f'Invalid settings payload: {e}')
+
+        self._save_settings(dict(updated_settings))
+        
+        return updated_settings
+    
+    
+    def _save_settings(self, settings: SettingsSchema) -> None:
+        with open(self.filename, "w", encoding="Utf-8") as file: 
+            json.dump(settings, file, ensure_ascii=False, indent=4)
