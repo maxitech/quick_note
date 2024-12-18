@@ -4,6 +4,7 @@ import createNote from '../../../api/notes/createNote'
 import updateNote from '../../../api/notes/updateNote'
 import { Note } from '../../../types/note'
 import { getCurrentMode } from '../../util/notes/store'
+import { loadSettings } from '../settings/settingsPage'
 
 const windowType = (window.api as { getWindowType: () => string }).getWindowType()
 
@@ -110,6 +111,7 @@ const renderNotes = async (): Promise<void> => {
 
       notesContainer!.insertBefore(noteWrapper, notesContainer!.firstChild)
     })
+    await loadSettings()
   } catch (error) {
     console.error('Failed while loading the notes:', error)
   }
@@ -149,7 +151,7 @@ const saveNote = async (): Promise<void> => {
     modalNoteTitleInput.value = ''
     modalNoteContentInput.value = ''
     closeModal()
-    renderNotes()
+    await renderNotes()
   } catch (error) {
     console.error('Failed to create note:', error)
   }
