@@ -19,7 +19,11 @@ def get_resource_path(filename: str) -> str:
     file_path = os.path.join(base_path, filename)
         
     if not os.path.exists(file_path):
-        with open(file_path, 'w') as f:
-            json.dump([], f) 
+        if filename == "settings.json":
+            with open(file_path, 'w') as f:
+                json.dump({}, f)
+        else:
+            with open(file_path, 'w') as f:
+                json.dump([], f) 
                 
     return file_path
