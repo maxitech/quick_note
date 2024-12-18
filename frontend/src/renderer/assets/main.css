@@ -361,7 +361,7 @@ body::-webkit-scrollbar {
   color: var(--color-lightgray);
 }
 
-.new-notebook-btn {
+.notebook-topbar-btn {
   font-family: var(--font-roboto);
   border: 1px solid var(--color-midgray);
   color: var(--color-lightgray);
@@ -372,12 +372,12 @@ body::-webkit-scrollbar {
   padding: 0 0.875rem;
 }
 
-.new-notebook-btn:hover,
-.new-notebook-btn:active {
+.notebook-topbar-btn:hover,
+.notebook-topbar-btn:active {
   background-color: var(--color-midgray);
 }
 
-.new-notebook-btn {
+.notebook-topbar-btn {
   transition: all 0.1s;
 }
 
