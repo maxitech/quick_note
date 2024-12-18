@@ -1,4 +1,3 @@
-from pathlib import Path
 import json
 from pydantic import ValidationError
 from .uitls import get_resource_path
@@ -10,7 +9,7 @@ class SettingsRepository:
         self.filename = get_resource_path(filename)
 
     def initialize_settings_with_defaults(self, default_values: SettingsSchema) -> None:
-        current_values = self._get_settings()
+        current_values = self._get_settings() or {}
         
         try:
             current_settings = SettingsSchema(**current_values)
