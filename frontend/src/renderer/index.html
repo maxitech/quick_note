@@ -129,11 +129,23 @@
     </div>
 
     <div id="settings-container" class="settings-container hidden">
-      <label for="color-schema">Choose a color for sticky-note</label>
-      <select name="color-schemas" id="color-schema">
-        <option value="">--Please choose an option--</option>
-        <option value="1">Pink & Cyan</option>
-      </select>
+      <h2 class="settings-heading">Settings</h2>
+      <div class="setting-module setting-module-active">
+        <div class="selector-container">
+          <label for="color-schema">Color Theme</label>
+          <p>Selects the color theme for sticky notes.</p>
+          <select name="color-schemas" id="color-schema">
+            <option value="#7afcff,#ff7eb9">Pink & Cyan</option>
+            <option value="#5e60ce,#748cab">Purple & Gray</option>
+            <option value="#8ecae6,#fdf0d5">Light Blue & Beige</option>
+            <option value="#fff,#02dddd">White & Teal</option>
+            <option value="#feff9c,#ff7eb9">Yellow & Pink</option>
+            <option value="#b8c0ff,#4cc9f0">Light Purple & Light Blue</option>
+            <option value="#fefae0,#ffb700">White & Orange</option>
+            <option value="#588157,#a3b18a">Dark Green & Norway</option>
+          </select>
+        </div>
+      </div>
     </div>
 
     <script src="./src/notes/navbar.ts" type="module"></script>
