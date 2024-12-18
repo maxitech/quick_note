@@ -17,8 +17,8 @@ function createWindow(): void {
   }
 
   mainWindow = new BrowserWindow({
-    width: 1068,
-    height: 670,
+    minWidth: 1068,
+    minHeight: 670,
     show: false,
     autoHideMenuBar: false,
     icon: path.join(__dirname, '../../resources', 'icon.png'),
@@ -67,8 +67,10 @@ function createStickyNote(): void {
   }
 
   stickyNoteWindow = new BrowserWindow({
-    width: 300,
-    height: 300,
+    maxWidth: 300,
+    maxHeight: 300,
+    minWidth: 300,
+    minHeight: 300,
     alwaysOnTop: true,
     resizable: false,
     frame: false,
