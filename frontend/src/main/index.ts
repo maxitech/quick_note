@@ -67,10 +67,8 @@ function createStickyNote(): void {
   }
 
   stickyNoteWindow = new BrowserWindow({
-    maxWidth: 300,
-    maxHeight: 300,
-    minWidth: 300,
-    minHeight: 300,
+    width: 300,
+    height: 300,
     alwaysOnTop: true,
     resizable: false,
     frame: false,
