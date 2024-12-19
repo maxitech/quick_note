@@ -2,6 +2,7 @@ import updateSettings from '../../../api/settings/updateSettings'
 import getSettings from '../../../api/settings/getSettings'
 import { Settings } from '../../../types/settings'
 
+const settingModule = document.getElementById('setting-module')! as HTMLDivElement
 const colorSchemaSelector = document.getElementById('color-schema') as HTMLSelectElement
 
 export async function loadSettings(): Promise<Settings | null> {
@@ -53,3 +54,23 @@ function setColorSchema(schema: Settings): void {
 }
 
 colorSchemaSelector.addEventListener('change', handleColorSchemaChange)
+
+settingModule.addEventListener('mouseenter', (e) => {
+  if ((e.target as Element).closest('#setting-module'))
+    settingModule.classList.add('setting-module-hover')
+})
+
+settingModule.addEventListener('mouseleave', (e) => {
+  if (!(e.target as Element).closest('setting-module'))
+    settingModule.classList.remove('setting-module-hover')
+})
+
+settingModule.addEventListener('click', (e) => {
+  if ((e.target as Element).closest('#setting-module'))
+    settingModule.classList.add('setting-module-active')
+})
+
+document.addEventListener('click', (e) => {
+  if (!(e.target as Element).closest('#setting-module'))
+    settingModule.classList.remove('setting-module-active')
+})
