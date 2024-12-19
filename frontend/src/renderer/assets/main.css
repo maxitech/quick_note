@@ -475,3 +475,8 @@ body::-webkit-scrollbar {
   background-color: var(--color-background);
   color: var(--color-white);
 }
+
+.selector-container > select:focus {
+  border-color: var(--color-background);
+  outline: none;
+}
