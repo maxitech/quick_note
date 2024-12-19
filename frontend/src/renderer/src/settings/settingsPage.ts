@@ -5,14 +5,16 @@ import { Settings } from '../../../types/settings'
 const settingModule = document.getElementById('setting-module')! as HTMLDivElement
 const colorSchemaSelector = document.getElementById('color-schema') as HTMLSelectElement
 
+const windowType = (window.api as { getWindowType: () => string }).getWindowType()
+
 export async function loadSettings(): Promise<Settings | null> {
   try {
     const settings = await getSettings()
 
-    if (settings.colorSchema) {
+    if (settings.colorSchema && windowType !== 'stickyNote') {
       colorSchemaSelector.value = settings.colorSchema.join(',')
       setColorSchema(settings)
-    }
+    } else setColorSchema(settings)
     return settings
   } catch (error) {
     console.error('Failed to load settings:', error)
@@ -53,24 +55,26 @@ function setColorSchema(schema: Settings): void {
   })
 }
 
-colorSchemaSelector.addEventListener('change', handleColorSchemaChange)
+if (windowType !== 'stickyNote') {
+  colorSchemaSelector.addEventListener('change', handleColorSchemaChange)
 
-settingModule.addEventListener('mouseenter', (e) => {
-  if ((e.target as Element).closest('#setting-module'))
-    settingModule.classList.add('setting-module-hover')
-})
+  settingModule.addEventListener('mouseenter', (e) => {
+    if ((e.target as Element).closest('#setting-module'))
+      settingModule.classList.add('setting-module-hover')
+  })
 
-settingModule.addEventListener('mouseleave', (e) => {
-  if (!(e.target as Element).closest('setting-module'))
-    settingModule.classList.remove('setting-module-hover')
-})
+  settingModule.addEventListener('mouseleave', (e) => {
+    if (!(e.target as Element).closest('setting-module'))
+      settingModule.classList.remove('setting-module-hover')
+  })
 
-settingModule.addEventListener('click', (e) => {
-  if ((e.target as Element).closest('#setting-module'))
-    settingModule.classList.add('setting-module-active')
-})
+  settingModule.addEventListener('click', (e) => {
+    if ((e.target as Element).closest('#setting-module'))
+      settingModule.classList.add('setting-module-active')
+  })
 
-document.addEventListener('click', (e) => {
-  if (!(e.target as Element).closest('#setting-module'))
-    settingModule.classList.remove('setting-module-active')
-})
+  document.addEventListener('click', (e) => {
+    if (!(e.target as Element).closest('#setting-module'))
+      settingModule.classList.remove('setting-module-active')
+  })
+}
