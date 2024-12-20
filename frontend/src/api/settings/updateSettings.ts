@@ -2,7 +2,7 @@ import { Settings } from '../../types/settings'
 
 export default async function updateSettings(payload: Record<string, unknown>): Promise<Settings> {
   try {
-    const response = await fetch('http://127.0.0.1:8000/settings', {
+    const response = await fetch('http://127.0.0.1:8000/settings/update', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
