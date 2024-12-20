@@ -2,7 +2,7 @@ import json
 from uuid import uuid4
 from typing import  Union
 
-from .uitls.file_utils import get_resource_path
+from .utils.file_utils import get_resource_path
 from schemas import NoteSchema, NoteUpdateSchema, NotebookSchema, NotebookUpdateSchema
 
 
