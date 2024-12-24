@@ -2,7 +2,6 @@ import updateSettings from '../../../api/settings/updateSettings'
 import getSettings from '../../../api/settings/getSettings'
 import { Settings } from '../../../types/settings'
 
-const settingModule = document.getElementById('setting-module')! as HTMLDivElement
 const colorSchemaSelector = document.getElementById('color-schema') as HTMLSelectElement
 
 const windowType = (window.api as { getWindowType: () => string }).getWindowType()
@@ -56,25 +55,35 @@ function setColorSchema(schema: Settings): void {
 }
 
 if (windowType !== 'stickyNote') {
+  const settingModules = document.querySelectorAll('.setting-module')
+
   colorSchemaSelector.addEventListener('change', handleColorSchemaChange)
 
-  settingModule.addEventListener('mouseenter', (e) => {
-    if ((e.target as Element).closest('#setting-module'))
+  settingModules.forEach((settingModule) => {
+    settingModule.addEventListener('mouseenter', () => {
       settingModule.classList.add('setting-module-hover')
-  })
+    })
 
-  settingModule.addEventListener('mouseleave', (e) => {
-    if (!(e.target as Element).closest('setting-module'))
+    settingModule.addEventListener('mouseleave', () => {
       settingModule.classList.remove('setting-module-hover')
-  })
+    })
 
-  settingModule.addEventListener('click', (e) => {
-    if ((e.target as Element).closest('#setting-module'))
+    settingModule.addEventListener('click', () => {
       settingModule.classList.add('setting-module-active')
-  })
+    })
 
-  document.addEventListener('click', (e) => {
-    if (!(e.target as Element).closest('#setting-module'))
-      settingModule.classList.remove('setting-module-active')
+    settingModule.addEventListener('click', () => {
+      settingModules.forEach((module) => {
+        module.classList.remove('setting-module-active')
+      })
+
+      settingModule.classList.add('setting-module-active')
+    })
+
+    document.addEventListener('click', (e) => {
+      if (!(e.target as Element).closest('.setting-module')) {
+        settingModule.classList.remove('setting-module-active')
+      }
+    })
   })
 }
