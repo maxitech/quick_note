@@ -1,3 +1,14 @@
 export interface Settings {
-  colorSchema?: string[]
+  colorSchema: string[]
+  themes: {
+    light: Theme
+    dark: Theme
+  }
+  defaultTheme: string
+  activeTheme: string
+}
+
+export interface Theme {
+  backgroundColor: string
+  textColor: string
 }
