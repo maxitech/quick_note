@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, field_validator, ValidationError
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional, List, Dict
 import re
 
@@ -6,8 +6,10 @@ import re
 class ThemeSchema(BaseModel):
     backgroundColor: str
     textColor: str
+    notebarBgColor: str
+    hoverColor: str
 
-    @field_validator("backgroundColor", "textColor")
+    @field_validator("backgroundColor", "textColor", "notebarBgColor", "hoverColor")
     def validate_hex_color(cls, value):
         hex_pattern = r"^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
         if not re.fullmatch(hex_pattern, value):
