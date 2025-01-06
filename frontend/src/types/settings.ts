@@ -11,4 +11,6 @@ export interface Settings {
 export interface Theme {
   backgroundColor: string
   textColor: string
+  notebarBgColor: string
+  hoverColor: string
 }
