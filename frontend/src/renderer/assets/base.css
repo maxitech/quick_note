@@ -11,6 +11,15 @@
   --color-lightgray: #adb5bd;
   --color-white: #dee2e6;
 
+  --color-text: #adb5bd;
+  --color-hover: var(--color-lightgray);
+  --color-notebar-bg: var(--color-darkgray);
+  --color-editor-bg: var(--color-white);
+  --color-settings-icon: var(--color-lightgray);
+  --color-settings-bg-hover: #2b2d3b67;
+  --color-settings-bg-active: #2b2d3b85;
+  --color-settings-inside-border: var(--color-teal);
+
   --color-purple: #5e60ce;
   --color-teal: #007e8f;
 
