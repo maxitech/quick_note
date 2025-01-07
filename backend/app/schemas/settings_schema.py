@@ -8,10 +8,15 @@ class ThemeSchema(BaseModel):
     textColor: str
     notebarBgColor: str
     hoverColor: str
+    editorBgColor: str
+    settingsIconColor: str
+    settingsBgHoverColor: str
+    settingsBgActiveColor: str
+    settingsInsideBorderColor: str
 
-    @field_validator("backgroundColor", "textColor", "notebarBgColor", "hoverColor")
+    @field_validator("backgroundColor", "textColor", "notebarBgColor","editorBgColor", "hoverColor", "settingsIconColor", "settingsBgHoverColor", "settingsBgActiveColor", "settingsInsideBorderColor")
     def validate_hex_color(cls, value):
-        hex_pattern = r"^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
+        hex_pattern = r"^#([a-fA-F0-9]{8}|[a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
         if not re.fullmatch(hex_pattern, value):
             raise ValueError(f"'{value}' is not a valid hex color")
         return value
