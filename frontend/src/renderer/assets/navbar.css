@@ -10,12 +10,12 @@ nav {
   height: 100vh;
 
   background-color: var(--color-background);
-  box-shadow: inset 0px 0px 3px 0px var(--color-midgray);
+  box-shadow: inset 0px 0px 3px 0px var(--color-hover);
 }
 
 .nav-btn {
   font-family: var(--font-roboto);
-  color: var(--color-lightgray);
+  color: var(--color-text);
   text-align: left;
   padding-left: 1.375rem;
   min-height: 1.5rem;
@@ -26,11 +26,11 @@ nav {
 
 .nav-btn:hover,
 .category-btn:hover {
-  background-color: var(--color-midgray);
+  background-color: var(--color-hover);
 }
 
 .btn-active {
-  background-color: var(--color-midgray) !important;
+  background-color: var(--color-hover) !important;
 }
 
 .dropdown-menu {
@@ -38,7 +38,7 @@ nav {
   display: block;
   height: 100%;
   background-color: var(--color-background);
-  box-shadow: inset 0px 2px 3px 0px var(--color-midgray);
+  box-shadow: inset 0px 2px 3px 0px var(--color-hover);
 }
 
 .category-btn {
@@ -66,11 +66,11 @@ nav {
 }
 
 .settings-icon {
-  stroke: var(--color-lightgray);
+  stroke: var(--color-settings-icon);
   width: 1.625rem;
 }
 
 .settings-icon:hover {
   fill: transparent;
-  stroke: var(--color-white);
+  stroke: var(--color-text);
 }
