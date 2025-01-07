@@ -12,5 +12,10 @@ export interface Theme {
   backgroundColor: string
   textColor: string
   notebarBgColor: string
+  editorBgColor: string
   hoverColor: string
+  settingsIconColor: string
+  settingsBgHoverColor: string
+  settingsBgActiveColor: string
+  settingsInsideBorderColor: string
 }
