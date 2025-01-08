@@ -1,10 +1,68 @@
 import { app, shell, BrowserWindow, ipcMain, globalShortcut } from 'electron'
+import { spawn, exec } from 'child_process'
 import path, { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
 let mainWindow: BrowserWindow | null = null
 let stickyNoteWindow: BrowserWindow | null = null
+let backendProcess: any = null
+
+function startBackend(): void {
+  const filePath = path.dirname(process.execPath)
+
+  let backendPath: string
+  if (is.dev) {
+    backendPath = path.join(__dirname, '../../../start_dev.bat')
+  } else {
+    // Local path to the backend executable
+    // backendPath =  Copy the path of main.exe
+
+    // Path to the backend executable for production
+    // backendPath = path.join(__dirname, '../main.exe')
+    backendPath = path.join(filePath, '../main.exe')
+  }
+
+  try {
+    backendProcess = spawn(backendPath, [], { shell: is.dev })
+    backendProcess.on('error', (err) => {
+      console.error(`Failed to start backend process: ${err.message}`)
+    })
+  } catch (error) {
+    console.error
+  }
+
+  backendProcess.stdout.on('data', (data) => {
+    console.log(`Backend: ${data}`)
+  })
+
+  backendProcess.stderr.on('data', (data) => {
+    console.error(`Backend Error: ${data}`)
+  })
+
+  backendProcess.on('close', (code) => {
+    console.log(`Backend process exited with code ${code}`)
+  })
+
+  backendProcess.on('error', (err) => {
+    console.error(`Failed to start backend: ${err}`)
+  })
+}
+
+function stopBackend(): void {
+  if (backendProcess) {
+    exec(`taskkill /F /IM main.exe`, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error stopping backend: ${error.message}`)
+      }
+      if (stderr) {
+        console.error(`Backend stop stderr: ${stderr}`)
+      }
+      console.log(`Backend stopped: ${stdout}`)
+    })
+    backendProcess = null
+  }
+}
 
 function createWindow(): void {
   // Create the browser window.
@@ -57,6 +115,7 @@ function createWindow(): void {
 
   mainWindow.on('closed', () => {
     mainWindow = null
+    stopBackend()
   })
 }
 
@@ -135,6 +194,7 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
+  startBackend()
   createWindow()
 
   registerShortcuts()
