@@ -9,64 +9,75 @@ Quick Note allows users to efficiently organize their notes in two distinct mode
 - **CRUD Operations**: Easily create, edit, and delete both sticky notes and notebook entries.
 - **Standalone Installer**: The application comes with a Windows `.exe` installer that combines both the backend and frontend into a single, user-friendly program.
 
-
 ## ⚡️ Technologies Used
 
-- **TypeScript** and **Electron.js**: For creating the frontend.  
-- **Python** and **FastAPI**: For handling the backend. 
-- **Inno Setup**: To build the installer.  
+- **TypeScript** and **Electron.js**: For creating the frontend.
+- **Python** and **FastAPI**: For handling the backend.
+- **Inno Setup**: To build the installer.
 
 ## 💡 What I Learned
 
-Developing Quick Note helped me expand my knowledge in several areas:  
-- **FastAPI**: Creating routes for CRUD operations.  
-- **Electron.js**: Building a functional and efficient desktop frontend.  
-- **PyInstaller**: Converting the Python backend into a standalone executable.  
-- **Exe Combination**: Integrating backend and frontend executables into a single application.  
+Developing Quick Note helped me expand my knowledge in several areas:
+
+- **FastAPI**: Creating routes for CRUD operations.
+- **Electron.js**: Building a functional and efficient desktop frontend.
+- **PyInstaller**: Converting the Python backend into a standalone executable.
+- **Exe Combination**: Integrating backend and frontend executables into a single application.
 - **Inno Setup**: Creating an installer for user-friendly distribution.
 
 ## 🖥️ Shortcut Hints
 
 - **Restore Main Window**: If the main window is minimized, press `Ctrl + Alt + Shift + N` to restore it.
 - **Create a StickyNote Window**: Use `Ctrl + Alt + N` to open a Sticky Note anytime.
-- **Open the New Note Window**: Press `Ctrl + N` to open the input window. 
+- **Open the New Note Window**: Press `Ctrl + N` to open the input window.
 - **Close New Note Window**: Press `Esc` to close the "New Note" window.
-- **Submit Note**: If you have filled out the details in the "New Note" window, press `Ctrl + Enter` to create the note. 
-- **Save New Note**: Press `Ctrl + S ` to save the current note or notebook. 
-
+- **Submit Note**: If you have filled out the details in the "New Note" window, press `Ctrl + Enter` to create the note.
+- **Save New Note**: Press `Ctrl + S ` to save the current note or notebook.
 
 ## 📦 Installation
 
 ### Download and Install
+
 To install Quick Note on your system, download the setup file from the latest release:  
 ➡️ [Download Latest version of Quick Note](https://github.com/maxitech/quick_note/releases)
 
 Once downloaded, run the installer and follow the on-screen instructions.
 
 ### Running the Application
-After installation:  
-1. Launch **Quick Note** from your desktop or start menu.  
-2. Have a look at the **Shortcut Hints**.  
+
+After installation:
+
+1. Launch **Quick Note** from your desktop or start menu.
+2. Have a look at the **Shortcut Hints**.
 
 ### Local Development
-To run the project locally, follow these steps:  
 
-#### Backend  
-Navigate to the backend folder and install dependencies: 
-   ```bash
-   cd backend
-   pip install -r requirements.txt
-```
-#### Frontend  
-Navigate to the frontend folder and install dependencies:
-   ```bash
-    cd frontend
-    npm install
-  ```
-#### Run Local Development Server
-Ensure you are in the root of the project and run the following command: 
+To run the project locally, follow these steps:
+
+#### Backend
+
+Navigate to the backend folder and install dependencies:
+
 ```bash
-  start_dev.bat
+cd backend
+pip install -r requirements.txt
+```
+
+#### Frontend
+
+Navigate to the frontend folder and install dependencies:
+
+```bash
+ cd frontend
+ npm install
+```
+
+#### Run Local Development Server
+
+Ensure you are in the frontend folder of the project and run the following command:
+
+```bash
+  npm run dev
 ```
 
 ## 🔧 Known Issues and Future Imporvements
@@ -82,5 +93,3 @@ Ensure you are in the root of the project and run the following command:
 - [PyInstaller Documentation](https://pyinstaller.org/en/stable/)
 - [Inno Setup](https://jrsoftware.org/isinfo.php)
 - [Quill](https://quilljs.com/docs/quickstart)
-
-
