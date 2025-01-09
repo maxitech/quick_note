@@ -192,4 +192,4 @@ modalCreateNoteBtn.addEventListener('click', async (e) => {
   saveNote()
 })
 
-renderNotes()
+await renderNotes()

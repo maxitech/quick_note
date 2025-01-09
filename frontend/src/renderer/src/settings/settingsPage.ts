@@ -26,7 +26,7 @@ export async function loadSettings(): Promise<Settings | null> {
   }
 }
 
-loadSettings()
+await loadSettings()
 
 async function handleColorSchemaChange(): Promise<void> {
   const selectedSchemaId = colorSchemaSelector.value
