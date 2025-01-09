@@ -146,9 +146,7 @@ async function saveNotebook(): Promise<void> {
   await fetchNotebooks()
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-  await fetchNotebooks()
-})
+await fetchNotebooks()
 
 const saveNotebookBtn = document.getElementById('save-notebook-btn') as HTMLButtonElement
 saveNotebookBtn.addEventListener('click', async () => {
