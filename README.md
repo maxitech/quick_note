@@ -6,6 +6,7 @@ Quick Note allows users to efficiently organize their notes in two distinct mode
 
 - **Sticky Notes**: Quickly create and organize sticky notes on your desktop with `Ctrl+Alt+N`. These notes can be moved around like physical post-it notes, providing an easy way to jot down quick ideas or reminders.
 - **Notebooks**: Create detailed, formatted notes within notebooks, utilizing a rich text editor powered by **Quill**. Notebooks allow for better long-term note management, offering advanced formatting options and organization.
+- **Settings**: Customize your experience with various options to tailor the application to your needs. 
 - **CRUD Operations**: Easily create, edit, and delete both sticky notes and notebook entries.
 - **Standalone Installer**: The application comes with a Windows `.exe` installer that combines both the backend and frontend into a single, user-friendly program.
 
